@@ -16,6 +16,8 @@ app.use(cors({
 app.use(express.json());
 //const{check,validationResult} = require('express-validator');
 
+app.use(cookieParser());
+
 const db = mysql.createConnection({
     host : 'localhost',
     user : 'root',
@@ -90,8 +92,8 @@ app.post('/login',[
         
     })
 })
-const verifyUser = () => {
-    const token = req.cookie.token;
+const verifyUser = (req,res,next) => {
+    const token = req.cookies.token;
     if(!token){
         return res.json({Error:"You are not authenticated"})
     }else{
@@ -108,43 +110,44 @@ const verifyUser = () => {
 
 }
 
-// app.get('/',verifyUser,(req,res))
-// {
-//     return res.json({Status : "Success", email:res.email,password:res.password})
-// }
-
-app.get('/',(req,res)=>{
-    const sql = `SELECT * FROM user`;
-    db.query(sql,(err,data)=>{
-        if(err) {
-        return res.json(err)
-        }
-        else{
-            return res.json({Status : "Success", email:res.email,password:res.password})   
-        }
-    })
+app.get('/',verifyUser,(req,res)=>
+{
+    return res.json({Status : "Success", email:res.email,password:res.password})
 })
 
-// app.get('/logout',(req,res) => {
-//     console.log('in logout route token is',req.body.token)
-//     res.clearCookie( 'token' );
-//     console.log('now token...',res.body.token)
-//     return res.json({Status:"Success"});
+// app.get('/',verifyUser,(req,res)=>{
+//     const sql = `SELECT * FROM user`;
+//     db.query(sql,(err,data)=>{
+//         if(err) {
+//         return res.json(err)
+//         }
+//         else{
+//             return res.json({Status : "Success", email:res.email,password:res.password})   
+//         }
+//     })
 // })
 
-app.get('/logout', (req, res) => {
-    const token = req.cookies.token; // Get the token from the request
-    console.log('in logout route....',token)
+app.get('/logout',(req,res) => {
+    console.log('in logout route token is',req.body.token)
+    res.clearCookie( 'token' );
+    console.log('now token...',res.body.token)
+    return res.json({Status:"Success"});
+})
 
-    if (token) {
-        // Clear the token from the client's cookies
-        res.clearCookie('token');
-        console.log('after clearing, token...', token)
-        return res.json({ Status: "Success" });
-    } else {
-        return res.json({ Error: "No token found" });
-    }
-});
+// app.get('/logout', (req, res) => {
+//     //const token =   JSON.stringify(response.data.tokenAuth.token)
+//     const token = JSON.stringify(req.cookies.tokenAuth.token); // Get the token from the request
+//     console.log('in logout route....',token)
+
+//     if (token) {
+//         // Clear the token from the client's cookies
+//         res.clearCookie('token');
+//         console.log('after clearing, token...', token)
+//         return res.json({ Status: "Success" });
+//     } else {
+//         return res.json({ Error: "No token found" });
+//     }
+// });
 
 
 

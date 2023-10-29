@@ -14,11 +14,13 @@ const Home = () => {
   const[name,setName]=useState('');
   const navigate=useNavigate();
 
+  //axios.defaults.withCredentials=true;
+
   
   useEffect(()=>{
     axios.get('http://localhost:8080')
     .then(res => {
-      //console.log('Response:', res.data); 
+      console.log('Response:', res.data); 
       if(res.data.Status === 'Success'){
         setAuth(true)
         setName(res.data.name)
@@ -43,14 +45,14 @@ const Home = () => {
       {
         auth?
         <div>
-          <h3>You are Authorized {name}</h3>
+          <h3>You are Authorized ....{name}</h3>
           <button className='btn btn-danger' onClick={handleDelete}>Log Out</button>
         </div>
       :
       <div>
         <h3>{message}</h3>
         <h3>Login Now</h3>
-        <Link to='/' className='btn btn-primary'>Log In</Link>
+        <Link to='/login' className='btn btn-primary'>Log In</Link>
       </div>
       }  
     </div>

@@ -28,7 +28,7 @@ const Register = () => {
        // errors.password==='' && errors.role==='' && errors.roleid==='' && errors.uin==='')
         axios.post('http://localhost:8080/register',values)
         .then(res =>( 
-            navigate('/')
+            navigate('/login')
         ))
         .catch(err => console.log(err));
     }
@@ -106,7 +106,7 @@ console.log({values},'.....values')
                 </div>
                 <button type = 'submit' className='btn btn-success w-100 rounded-0'>Register</button><br/>
                 <p>Want to Log In?</p>
-                <Link to ='/' className='btn btn-default border w-100 bg-light rounded-0'>Log In</Link>
+                <Link to ='/login' className='btn btn-default border w-100 bg-light rounded-0'>Log In</Link>
             </form>
         </div>
     </div>

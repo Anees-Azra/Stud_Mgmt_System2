@@ -36,7 +36,7 @@ const Login = () => {
             else{  
                 console.log('Success') 
             if(res.data === 'Success'){
-            navigate('/home')
+            navigate('/')
             }else{
                 alert('No record existed')
             }
