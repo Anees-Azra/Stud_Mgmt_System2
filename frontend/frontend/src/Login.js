@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
-    console.log('in login route')
+    console.log('in loginjs')
     const [values,setValues] = useState({
         'emailid':'',
         'password': ''

@@ -24,6 +24,7 @@ const Home = () => {
       if(res.data.Status === 'Success'){
         setAuth(true)
         setName(res.data.name)
+        console.log(res.data)
       
       }else{
         setAuth(false)
@@ -55,7 +56,12 @@ const Home = () => {
         <Link to='/login' className='btn btn-primary'>Log In</Link>
       </div>
       }  
+      <div className='d-flex flex-column justify-content-center align-content-center bg-light vh100'>
+        <h1>List of Users</h1>
+
+      </div>
     </div>
+    
   )
 }
 

@@ -58,39 +58,49 @@ app.post('/login',[
 ]
 , (req,res) => {
     console.log('in login route')
-    const sql = `SELECT * FROM user WHERE emailid=? AND password=?`;
+    const sql = `SELECT * FROM users WHERE emailid=? AND password=?`;
    
-    console.log("request  in login route", req.body)
+    console.log("request in login route", req.body)
 
-    db.query(sql,[req.body.emailid,req.body.password], (err,data) => {
-        const errors= validationResult(req)
-        if(!errors.isEmpty()){
-            return res.json(errors)
-        }else{
-            if(err){
-                return res.status(500).json({ error: "Database error" });
+    try {
+        db.query(sql,[req.body.emailid,req.body.password], (err,data) => {
+            const errors= validationResult(req)
+            if(!errors.isEmpty()){
+                console.log(errors)
+                return res.json(errors)
+            }else{
+                if(err){
+                    console.log(err)
+                    return res.status(500).json({ error: "Database error" });
+                }
+                console.log(data, 'data in login route')
+                if(data.length>0){
+                    const email=data[0].emailid;
+                    console.log(email)
+                    const password=data[0].password;
+                    console.log(password)
+                    const token = jwt.sign({email,password},secretKey)
+                  
+                    res.cookie('token',token)
+                    console.log('token',token)
+                    return res.json('Success')
+                }
+                
+                else{
+                    return res.json('Failure')
+                }
             }
-            console.log(data, 'data in login route')
-            if(data.length>0){
-                const email=data[0].emailid;
-                console.log(email)
-                const password=data[0].password;
-                console.log(password)
-                const token = jwt.sign({email,password},secretKey)
-              
-                res.cookie('token',token)
-                console.log('token',token)
-                return res.json('Success')
-            }
+    
+    
+            console.log(email,password)
+                console.log(token)
             
-            else{
-                return res.json('Failure')
-            }
-        }
-        console.log(email,password)
-            console.log(token)
-        
-    })
+        })
+    } catch(e) {
+        console.log("error")
+        console.error(e)
+    }
+   
 })
 const verifyUser = (req,res,next) => {
     const token = req.cookies.token;
@@ -115,39 +125,16 @@ app.get('/',verifyUser,(req,res)=>
     return res.json({Status : "Success", email:res.email,password:res.password})
 })
 
-// app.get('/',verifyUser,(req,res)=>{
-//     const sql = `SELECT * FROM user`;
-//     db.query(sql,(err,data)=>{
-//         if(err) {
-//         return res.json(err)
-//         }
-//         else{
-//             return res.json({Status : "Success", email:res.email,password:res.password})   
-//         }
-//     })
-// })
 
 app.get('/logout',(req,res) => {
-    console.log('in logout route token is',req.body.token)
-    res.clearCookie( 'token' );
+
+    console.log('in logout route token is',req.body)
+    //res.clearCookie('token');
+    res.clearCookie('token', {path: '/', domain: 'localhost'}).send();
     console.log('now token...',res.body.token)
     return res.json({Status:"Success"});
 })
 
-// app.get('/logout', (req, res) => {
-//     //const token =   JSON.stringify(response.data.tokenAuth.token)
-//     const token = JSON.stringify(req.cookies.tokenAuth.token); // Get the token from the request
-//     console.log('in logout route....',token)
-
-//     if (token) {
-//         // Clear the token from the client's cookies
-//         res.clearCookie('token');
-//         console.log('after clearing, token...', token)
-//         return res.json({ Status: "Success" });
-//     } else {
-//         return res.json({ Error: "No token found" });
-//     }
-// });
 
 
 
