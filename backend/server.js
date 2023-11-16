@@ -1,4 +1,4 @@
-import React from 'react'
+
 import express from 'express';
 import mysql  from 'mysql';
 import cors from 'cors';
@@ -31,7 +31,7 @@ const secretKey = crypto.randomBytes(32).toString('hex');
 
 app.post('/register', (req,res) => {
     console.log('in register route')
-    const sql = `INSERT INTO user (fullname,dob,emailid,password,
+    const sql = `INSERT INTO users (fullname,dob,emailid,password,
         role,roleid,uin) VALUES(?)`;
     const values =[
         req.body.fullname,
@@ -40,7 +40,7 @@ app.post('/register', (req,res) => {
         req.body.password, 
         'Student', 
         1, 
-        req.body.uin, 
+        req.body.uin, ls
     ]
     console.log(values)
     db.query(sql,[values], (err,data) => {
