@@ -12,8 +12,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 return ( 
 <BrowserRouter>
  <Routes> 
-  {/* <Route path='/' element={<Home />}/>  */}
-<Route path='/' element={<Home />}/>
+ <Route path='/' element={<Home />}/>
  <Route path='/register' element={<Register />}/>
  <Route path='/login' element={<Login />}/> 
  <Route path='/create' element={<Create />}/> 

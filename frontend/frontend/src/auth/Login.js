@@ -26,17 +26,20 @@ const Login = () => {
 
         //if(errors.emailid==='' && errors.password==='')
         console.log(values, 'going to login route')
+        axios.post('http://localhost:8080/routes/userauth/login',values)
         
-        axios.post('http://localhost:8080/login',values)
         .then(res =>{
+            console.log('in .then')
             if(res.data.errors){
                 setBackendError(res.data.errors)
             }
             //console.log(res) 
             else{  
-                console.log('Success') 
+                console.log(res.data) 
             if(res.data === 'Success'){
+               console.log('before navigation') 
             navigate('/')
+            console .log('after navigation')
             }else{
                 alert('No record existed')
             }
