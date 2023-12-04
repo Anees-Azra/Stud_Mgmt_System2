@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import { check, validationResult } from 'express-validator';
 import crypto from 'crypto';
 
-const router = express();
+const router = express.Router();
 // router.use(cors({
 //     origin : ["http://localhost:3000"],
 //     methods:["POST","GET"],
@@ -30,8 +30,8 @@ const secretKey = crypto.randomBytes(32).toString('hex');
 
 router.post('/register', (req,res) => {
     console.log('in register route')
-    const sql = `INSERT INTO users (fullname,dob,emailid,password,
-        role,roleid,uin) VALUES(?)`;
+    const sql = `INSERT INTO users (Fullname,Dob,EmailId,Password,
+        Role,Roleid,UIN) VALUES(?)`;
     const values =[
         req.body.fullname,
         req.body.dob, 
@@ -39,7 +39,7 @@ router.post('/register', (req,res) => {
         req.body.password, 
         'Student', 
         1, 
-        req.body.uin, 
+        req.body.UIN, 
     ]
     console.log(values)
     db.query(sql,[values], (err,data) => {
@@ -57,9 +57,10 @@ router.post('/login',[
 ]
 , (req,res) => {
     console.log('in login route')
-    const sql = `SELECT * FROM users WHERE emailid=? AND password=?`;
+    const sql = `SELECT * FROM users WHERE EmailId=? AND Password=?`;
    
     console.log("request in login route", req.body)
+    console.log("email", req.body.emailid)
 
     try {
         db.query(sql,[req.body.emailid,req.body.password], (err,data) => {

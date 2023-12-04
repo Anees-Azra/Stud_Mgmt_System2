@@ -26,7 +26,7 @@ const Register = () => {
         setErrors(Validation(values)) 
         //if(errors.fullname==='' && errors.dob==='' && errors.emailid==='' &&
        // errors.password==='' && errors.role==='' && errors.roleid==='' && errors.uin==='')
-        axios.post('http://localhost:8080/register',values)
+        axios.post('http://localhost:8080/routes/userauth/register',values)
         .then(res =>( 
             navigate('/login')
         ))
@@ -54,13 +54,14 @@ console.log({values},'.....values')
                 </div>
                 <div className='mb-3'>
                     <label><strong>Date of Birth:</strong></label>
-                    {/* <input type='text' placeholder='YYYY/MM/DD'
+                    <input type='text' placeholder='YYYY/MM/DD'
                              className='form-control rounded-0'
                              onChange={handleInput}
                              onclick="datepicker('#datePick')"
-                             name='dob'/> */}
+                             name='dob'/> 
+                             
+                             {/* <DatePicker selected={dob} onChange={(date) => setDob(date)} /> */}
                              {errors.dob && <span className='text-danger'>{errors.dob}</span>}
-                             <DatePicker selected={dob} onChange={(date) => setDob(date)} />
                       
                 </div>
                 <div className='mb-3'>

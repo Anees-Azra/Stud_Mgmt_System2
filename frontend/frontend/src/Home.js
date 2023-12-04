@@ -44,7 +44,7 @@ const Home = () => {
           setData(res.data);
           console.log('Data:', data);
 
-          setName(res.data.Fullname);
+          setName(res.data.fullname);
         } else {
           console.log('Setting auth to false');
           setAuth(false);
