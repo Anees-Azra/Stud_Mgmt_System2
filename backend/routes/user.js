@@ -14,10 +14,10 @@ app.use(express.json);
 
 router.post('/createuser', (req, res) => {
    // Assuming your request body contains the necessary data for a new user
-   const {UIN,Fullname, Dob, EmailId, Password, Role, Roleid } = req.body;
+   const {UIN,Fullname, Dob, EmailId, Password, Role, Roleid ,IsDelete} = req.body;
 
-   const sql = 'INSERT INTO users (UIN, Fullname, Dob, EmailId, Password, Role, Roleid) VALUES (?, ?, ?, ?, ?, ?, ?)';
-   const values = [UIN,Fullname, Dob, EmailId, Password, Role, Roleid];
+   const sql = 'INSERT INTO users (UIN, Fullname, Dob, EmailId, Password, Role, Roleid,IsDelete) VALUES (?, ?, ?, ?, ?, ?, ?,?)';
+   const values = [UIN,Fullname, Dob, EmailId, Password, Role, Roleid,IsDelete];
 
    db.query(sql, values, (err, result) => {
       if (err) {
@@ -48,9 +48,9 @@ router.get('/readuser/:UIN', (req, res) => {
 router.put('/updateuser/:UIN', (req,res) =>{
    console.log('update user', req.body)
    const{ UIN } = req.params;
-   const {Fullname,Dob,EmailId,Password,Role,RoleId} = req.body;
-   const sql ='update users set Fullname=?,Dob=?,EmailId=?,Password=?,Role=?,RoleId=? where UIN=?';
-   const values = [Fullname,Dob,EmailId,Password,Role,RoleId,UIN];
+   const {Fullname,Dob,EmailId,Password,Role,RoleId,IsDelete} = req.body;
+   const sql ='update users set Fullname=?,Dob=?,EmailId=?,Password=?,Role=?,RoleId=?,IsDelete=? where UIN=?';
+   const values = [Fullname,Dob,EmailId,Password,Role,RoleId,IsDelete,UIN];
 
    db.query(sql, values,(err,result) => {
       if(err){
