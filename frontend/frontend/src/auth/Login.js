@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState , useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Validation from './LoginValidation';
 import {useNavigate} from 'react-router-dom';
@@ -9,11 +9,20 @@ const Login = () => {
     const [values,setValues] = useState({
         'emailid':'',
         'password': ''
+       // 'role': ''
     })
     console.log(values)
+    //const [userRole , setUserRole] = useState();
+    //const [isTeacher , setIsTeacher]= useState(false);
     const[errors,setErrors]=useState({})
     const[backendError,setBackendError]=useState([])
     const navigate=useNavigate();
+
+    // useEffect(() => {
+    //     axios.get('http://localhost:8080/routes/user/readrole/:EmailId' , values)
+    //     .then(res => setUserRole(res.values.Role))
+    //     .catch(err => console.log(err))
+    // },[]);
 
     axios.defaults.withCredentials=true;
 
@@ -43,12 +52,13 @@ const Login = () => {
             }else{
                 alert('No record existed')
             }
+            // if (res.data.role === "Teacher"){
+            //     setIsTeacher(true);
+            // }
             }})
         .catch(err => console.log(err));
     }
-    
-
-    const handleInput = (event) =>{
+        const handleInput = (event) =>{
         setValues(prev => ({...prev,[event.target.name]:event.target.value}))
     }
 
@@ -80,7 +90,13 @@ const Login = () => {
                 </div>
                 <button type = 'submit' className='btn btn-success w-100 rounded-0'>Log In</button>
                 <p>Not Registered?</p>
-                <Link to ='/register' className='btn btn-default border w-100 bg-light rounded-0'>Register</Link>
+                <Link to ='/register' className='btn btn-default border w-100 bg-light rounded-0'>
+                    Register</Link>
+                {/* <Link to='/createcourse' classname = 'btn btn-primary w-100 rounded 0'>
+                    Create Course</Link> */}
+                {/* {values.role === 'Teacher' && (
+                <Link to='/createcourse' classname = 'btn btn-primary w-100 rounded 0'>
+                    Create Course</Link>)} */}
             </form>
         </div>
     </div>

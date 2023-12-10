@@ -1,6 +1,9 @@
 import express from 'express';
 import userauthRoute from './routes/userauth.js';
 import userRoute from './routes/user.js';
+import coursesRoute from './routes/courses.js'
+import rolesRoute from './routes/roles.js';
+import threadsRoute from './routes/threads.js'
 import cors from 'cors';
 
 const app = express();
@@ -18,7 +21,11 @@ app.use(express.json());
 
 // Use the userauth route
 app.use('/routes/userauth', userauthRoute);
-app.use('/routes/user',userRoute)
+app.use('/routes/user',userRoute);
+app.use('/routes/courses' , coursesRoute);
+app.use('/routes/roles' , rolesRoute);
+app.use('/routes/threads' , threadsRoute);
+
 
 // Handle root URL and root URL with trailing slash
 // app.get(['/', '/routes/userauth'], (req, res) => {
