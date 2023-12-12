@@ -3,9 +3,7 @@ import './App.css';
 import Login from './auth/Login'
 import Register from'./auth/Register';
 import Home from './Home' 
-import Create from './user/Create' 
-import Read from './user/Read' 
-import Update from './user/Update' 
+import CreateCourse from './CreateCourse';
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 
  const App = () => { 
@@ -15,9 +13,7 @@ return (
  <Route path='/' element={<Home />}/>
  <Route path='/register' element={<Register />}/>
  <Route path='/login' element={<Login />}/> 
- <Route path='/create' element={<Create />}/> 
- <Route path='/read/:id' element={<Read />}/> 
- <Route path='/update/:id' element={<Update />}/> 
+ <Route path= '/createcourse' element={<CreateCourse />}/>
 </Routes> 
 </BrowserRouter> 
 //<Home />

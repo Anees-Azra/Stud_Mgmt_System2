@@ -56,10 +56,10 @@ router.get('/readuser/:UIN', (req, res) => {
    });
 });
 
-router.get('/readuser/:EmailId' , (req,res) => {
+router.get('/readuser/email/:EmailId' , (req,res) => {
    const { EmailId } = req.params;
    console.log('EmailId :',EmailId);
-   const sql = 'select Role from users where Fullname = ?';
+   const sql = 'select Role from users where EmailId = ?';
    console.log('sql', sql);
    
    db.query(sql , [EmailId] , (err , data) => {
