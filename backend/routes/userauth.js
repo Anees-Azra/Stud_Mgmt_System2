@@ -6,15 +6,7 @@ import { check, validationResult } from 'express-validator';
 import crypto from 'crypto';
 
 const router = express.Router();
-// router.use(cors({
-//     origin : ["http://localhost:3000"],
-//     methods:["POST","GET"],
-//     credentials: true,
-//     allowedHeaders: ["Content-Type", "Authorization"]
-// }));
 router.use(express.json());
-//const{check,validationResult} = require('express-validator');
-
 router.use(cookieParser());
 
 const db = mysql.createConnection({
@@ -24,19 +16,17 @@ const db = mysql.createConnection({
     database: 'stud_database'
 })
 
-
-//const crypto = require('crypto');
 const secretKey = crypto.randomBytes(32).toString('hex');
 
 router.post('/register', (req, res) => {
     console.log('in register route')
-    const {Fullname , Dob , EmailId ,Password , Role , RoleId ,UIN} = req.body;
-    console.log('req.body' , req.body)
+    const { Fullname, Dob, EmailId, Password, Role, RoleId, UIN } = req.body;
+    console.log('req.body', req.body)
     const sql = `INSERT INTO users (Fullname,Dob,EmailId,Password,
         Role,Roleid,UIN) VALUES(?,?,?,?,?,?,?)`;
-    const values = [ Fullname,Dob,EmailId,Password,'Student',1,UIN ]
-    console.log('values' , values)
-    db.query(sql, values , (err, result) => {
+    const values = [Fullname, Dob, EmailId, Password, 'Student', 1, UIN]
+    console.log('values', values)
+    db.query(sql, values, (err, result) => {
         if (err) {
             console.log(err)
             return res.status(500).json({ error: "Database error" });
@@ -46,8 +36,8 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', [
-    check('emailid', "Email Length Error").isEmail().isLength({ min: 8, max: 30 }),
-    check('password', "Password length 8-10").isLength({ min: 8, max: 20 })
+    check('emailid', "Email Length 8-20").isEmail().isLength({ min: 8, max: 30 }),
+    check('password', "Password Length 8-20").isLength({ min: 8, max: 20 })
 ]
     , (req, res) => {
         console.log('in login route')
@@ -73,23 +63,30 @@ router.post('/login', [
                         console.log(email)
                         const password = data[0].Password;
                         console.log(password)
+                        const role = data[0].Role;
+                        console.log(role)
                         const token = jwt.sign({ email, password }, secretKey)
 
                         res.cookie('token', token)
                         console.log('token', token)
-                        return res.json('Success');
-                        // return res.json({
+                        //return res.json('Success');
+                        //return res.json({
                         //     "Message": "Login successfull",
-                        //     "token": token
-                        //   })
-                    }
+                        //     "token": token,
 
+
+                        //})
+                        return res.json({
+                            Message: "Login successful",
+                            Role: data[0].Role,
+                            Token: token
+                        });
+                    }
                     else {
                         return res.json('Failure')
                     }
                 }
-                console.log(email, password)
-                console.log(token)
+
             })
         } catch (e) {
             console.log("error")
@@ -97,6 +94,7 @@ router.post('/login', [
         }
 
     })
+    
 const verifyUser = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
@@ -112,7 +110,6 @@ const verifyUser = (req, res, next) => {
             }
         })
     }
-
 }
 
 router.get('/', verifyUser, (req, res) => {

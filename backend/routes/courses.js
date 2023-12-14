@@ -11,11 +11,39 @@ const db = mysql.createConnection({
 const router = express();
 const app = express();
 app.use(express.json);
+// // if RoleId === TeacherId 
+// router.post('/createcourse', (req, res) => {
+//     const { CourseId, CourseName ,RoleId} = req.body;
+//     const TeacherId = 2;
+
+//     if(RoleId === TeacherId){
+//     const sql = 'insert into courses (CourseId , CourseName, IsDelete) values (?,?,?)';
+//     const values = [CourseId, CourseName , IsDelete]
+//     console.log('values', values)
+
+//     db.query(sql, values, (err, result) => {
+//         if (err) {
+//             console.log('Error', err);
+//             return res.status(500).json({ Error: 'Database Error' })
+//         }
+//         //return res.json(values);
+//         const createdCourseId = result.insertId;
+
+//         return res.json({
+//             CourseId: createdCourseId,
+//             CourseName: CourseName,
+//             Message: 'Course created successfully'
+//         })
+//     })
+// }else{
+//     return res.json({Message : 'User is not Teacher'})
+// }
+// })
 
 router.post('/createcourse', (req, res) => {
-    const { CourseId, CourseName } = req.body;
-    const sql = 'insert into courses (CourseId , CourseName) values (?,?)';
-    const values = [CourseId, CourseName]
+    const { CourseId, CourseName, IsDelete } = req.body;
+    const sql = 'insert into courses (CourseId , CourseName, IsDelete) values (?,?,?)';
+    const values = [CourseId, CourseName, IsDelete]
     console.log('values', values)
     db.query(sql, values, (err, result) => {
         if (err) {
@@ -32,6 +60,7 @@ router.post('/createcourse', (req, res) => {
         })
     })
 })
+
 
 router.get('/readallcourses', (req, res) => {
     const sql = 'select * from courses';
@@ -75,7 +104,7 @@ router.delete('/deletecourse/:CourseId', (req, res) => {
     const sql = 'delete from courses where CourseId = ?';
     const values = [CourseId];
 
-    db.query(sql, values, (err, result) => {
+    db.query(sql, [CourseId], (err, result) => {
         if (err) {
             return res.status(500).json({ Error: 'Database Error' });
         }

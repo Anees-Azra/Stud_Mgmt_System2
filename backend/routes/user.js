@@ -9,8 +9,7 @@ const db = mysql.createConnection({
 })
 
 const router = express();
-const app = express();
-app.use(express.json);
+router.use(express.json);
 
 router.post('/createuser', (req, res) => {
    // Assuming your request body contains the necessary data for a new user
