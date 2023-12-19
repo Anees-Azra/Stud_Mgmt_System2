@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
-    console.log('in loginjs');
+
     const [values, setValues] = useState({
         'emailid': '',
         'password': ''
@@ -15,8 +15,6 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // You can use this to fetch additional user data after login, like the role
-        // This is just an example, update it based on your server-side implementation
         const fetchUserData = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/routes/user/readrole', {
@@ -44,21 +42,26 @@ const Login = () => {
             .then(res => {
                 console.log('in .then');
                 if (res.data.errors) {
+                    console.log(res.data.errors)
                     setBackendError(res.data.errors);
                 } else {
-                    console.log(res.data);
+                    console.log('res.data', res.data);
                     if (res.data.Message === 'Login successful') {
                         console.log('before navigation');
                         console.log(res.data)
                         const userRole = res.data.Role;
-                        console.log('userRole:',userRole);
+                        console.log('userRole:', userRole);
                         if (userRole === 'Teacher') {
-                            navigate('/createcourse'); // Replace with the teacher route
-                        } 
-                        if (userRole === 'Student') 
-                        {
+                            console.log('Navigating to /createcourse');
+                            navigate('/teacherdashboard'); // Replace with the teacher route
+                        }
+
+                        else if (userRole === 'Student') {
+                            console.log('userrole is', userRole)
+                            console.log('Navigating to /');
                             navigate('/'); // Replace with the student route
                         }
+
                         //navigate('/');
                         console.log('after navigation');
                     } else {

@@ -1,5 +1,6 @@
 import express from 'express';
 import mysql from 'mysql';
+import verifyUser from '../middleware/verifyUser.js'
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -9,41 +10,17 @@ const db = mysql.createConnection({
 })
 
 const router = express();
+router.use(verifyUser);
 const app = express();
 app.use(express.json);
-// // if RoleId === TeacherId 
-// router.post('/createcourse', (req, res) => {
-//     const { CourseId, CourseName ,RoleId} = req.body;
-//     const TeacherId = 2;
 
-//     if(RoleId === TeacherId){
-//     const sql = 'insert into courses (CourseId , CourseName, IsDelete) values (?,?,?)';
-//     const values = [CourseId, CourseName , IsDelete]
-//     console.log('values', values)
-
-//     db.query(sql, values, (err, result) => {
-//         if (err) {
-//             console.log('Error', err);
-//             return res.status(500).json({ Error: 'Database Error' })
-//         }
-//         //return res.json(values);
-//         const createdCourseId = result.insertId;
-
-//         return res.json({
-//             CourseId: createdCourseId,
-//             CourseName: CourseName,
-//             Message: 'Course created successfully'
-//         })
-//     })
-// }else{
-//     return res.json({Message : 'User is not Teacher'})
-// }
-// })
 
 router.post('/createcourse', (req, res) => {
+    console.log('in createcourse route')
     const { CourseId, CourseName, IsDelete } = req.body;
+    console.log('req body', req.body)
     const sql = 'insert into courses (CourseId , CourseName, IsDelete) values (?,?,?)';
-    const values = [CourseId, CourseName, IsDelete]
+    const values = [CourseId, CourseName, 0]
     console.log('values', values)
     db.query(sql, values, (err, result) => {
         if (err) {
@@ -56,9 +33,12 @@ router.post('/createcourse', (req, res) => {
         return res.json({
             CourseId: createdCourseId,
             CourseName: CourseName,
+            IsDelete: 0,
             Message: 'Course created successfully'
         })
+
     })
+    console.log('end of createcourse')
 })
 
 
@@ -73,29 +53,71 @@ router.get('/readallcourses', (req, res) => {
     })
 })
 
+// router.put('/updatecourse/:CourseId', (req, res) => {
+//     const courseId = parseInt(req.params.CourseId, 10);
+//     const { CourseId } = req.params;
+//     console.log('courseid', CourseId)
+//     const { CourseName } = req.body;
+//     const sql = 'update courses set CourseName=? where CourseId=?';
+//     const values = [CourseName, courseId];
+//     console.log('values', values);
+
+//     db.query(sql, values, (err, result) => {
+//         if (err) {
+//             console.log(err)
+//             return res.status(500).json({ Error: 'Database Error' });
+//         }
+//         if (result.affectedRows === 1) {
+//             //return res.status(200).json({Message : 'Course Updated Successfully'});
+//             return res.json({
+//                 "CourseName": values[0],
+//                 "CourseId": values[1]
+//             });
+//         }
+//         return res.json({ Error: 'User Not Found' });
+//     })
+
+// })
+
+// 
+
 router.put('/updatecourse/:CourseId', (req, res) => {
-    const { CourseId } = req.params;
+    // Parse CourseId as an integer
+    const courseId = parseInt(req.params.CourseId, 10);
+
+    // Check if CourseId is a valid number
+    if (isNaN(courseId)) {
+        return res.status(400).json({ error: 'Invalid CourseId' });
+    }
+
     const { CourseName } = req.body;
-    const sql = 'update courses set CourseName=? where CourseId=?';
-    const values = [CourseName, CourseId];
-    console.log('values', values);
+
+    // Check if CourseName is provided
+    if (!CourseName) {
+        return res.status(400).json({ error: 'CourseName is required for update' });
+    }
+
+    const sql = 'UPDATE courses SET CourseName=? WHERE CourseId=?';
+    const values = [CourseName, courseId];
 
     db.query(sql, values, (err, result) => {
         if (err) {
-            console.log(err)
-            return res.status(500).json({ Error: 'Database Error' });
+            console.error(err);
+            return res.status(500).json({ error: 'Database Error' });
         }
+
         if (result.affectedRows === 1) {
-            //return res.status(200).json({Message : 'Course Updated Successfully'});
             return res.json({
-                "CourseName": values[0],
-                "CourseId": values[1]
+                CourseId: courseId,
+                CourseName: CourseName,
+                Message: 'Course Updated Successfully',
             });
         }
-        return res.json({ Error: 'User Not Found' });
-    })
 
-})
+        return res.status(404).json({ error: 'Course Not Found' });
+    });
+});
+
 
 router.delete('/deletecourse/:CourseId', (req, res) => {
     const { CourseId } = req.params;
@@ -112,4 +134,4 @@ router.delete('/deletecourse/:CourseId', (req, res) => {
     })
 })
 
-export default router;
+export default router

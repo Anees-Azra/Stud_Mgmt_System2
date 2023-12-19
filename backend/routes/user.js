@@ -55,23 +55,23 @@ router.get('/readuser/:UIN', (req, res) => {
    });
 });
 
-router.get('/readuser/email/:EmailId' , (req,res) => {
+router.get('/readuser/email/:EmailId', (req, res) => {
    const { EmailId } = req.params;
-   console.log('EmailId :',EmailId);
+   console.log('EmailId :', EmailId);
    const sql = 'select Role from users where EmailId = ?';
    console.log('sql', sql);
-   
-   db.query(sql , [EmailId] , (err , data) => {
-      if(err){
-         console.error('err' , err);
-         return res.status(500).json({Error : "Database Error"});
+
+   db.query(sql, [EmailId], (err, data) => {
+      if (err) {
+         console.error('err', err);
+         return res.status(500).json({ Error: "Database Error" });
       }
       console.log('data', data);
-      if(data && data.length>0){
+      if (data && data.length > 0) {
 
-      return res.json(data);
+         return res.json(data);
       } else {
-         return ({Message : 'user Unauthorised'});
+         return ({ Message: 'user Unauthorised' });
       }
    })
 })

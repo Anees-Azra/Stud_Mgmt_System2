@@ -1,5 +1,6 @@
 import express from 'express';
 import mysql from 'mysql';
+import verifyUser from '../middleware/verifyUser.js';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import { check, validationResult } from 'express-validator';
@@ -16,7 +17,7 @@ const db = mysql.createConnection({
     database: 'stud_database'
 })
 
-const secretKey = crypto.randomBytes(32).toString('hex');
+const secretKey = "8325731cde8293dbe25e329450ae2aa60486002f6eba23faacb69a9a18952e43";
 
 router.post('/register', (req, res) => {
     console.log('in register route')
@@ -35,85 +36,62 @@ router.post('/register', (req, res) => {
     })
 })
 
-router.post('/login', [
-    check('emailid', "Email Length 8-20").isEmail().isLength({ min: 8, max: 30 }),
-    check('password', "Password Length 8-20").isLength({ min: 8, max: 20 })
-]
-    , (req, res) => {
-        console.log('in login route')
-        const sql = `SELECT * FROM users WHERE EmailId=? AND Password=?`;
-
-        console.log("request in login route", req.body)
-        console.log("email", req.body.emailid)
-
-        try {
-            db.query(sql, [req.body.emailid, req.body.password], (err, data) => {
-                const errors = validationResult(req)
-                if (!errors.isEmpty()) {
-                    console.log(errors)
-                    return res.json(errors)
-                } else {
-                    if (err) {
-                        console.log(err)
-                        return res.status(500).json({ error: "Database error" });
-                    }
-                    console.log(data, 'data in login route')
-                    if (data.length > 0) {
-                        const email = data[0].EmailId;
-                        console.log(email)
-                        const password = data[0].Password;
-                        console.log(password)
-                        const role = data[0].Role;
-                        console.log(role)
-                        const token = jwt.sign({ email, password }, secretKey)
-
-                        res.cookie('token', token)
-                        console.log('token', token)
-                        //return res.json('Success');
-                        //return res.json({
-                        //     "Message": "Login successfull",
-                        //     "token": token,
-
-
-                        //})
-                        return res.json({
-                            Message: "Login successful",
-                            Role: data[0].Role,
-                            Token: token
-                        });
-                    }
-                    else {
-                        return res.json('Failure')
-                    }
-                }
-
-            })
-        } catch (e) {
-            console.log("error")
-            console.error(e)
-        }
-
-    })
-    
-const verifyUser = (req, res, next) => {
-    const token = req.cookies.token;
-    if (!token) {
-        return res.json({ Error: "You are not authenticated" })
-    } else {
-        jwt.verify(token, secretKey, (err, decoded) => {
-            if (err) {
-                return res.json({ Error: "Token is not correct" })
+router.post('/login', (req, res) => {
+    console.log('in login route')
+    const sql = `SELECT * FROM users WHERE EmailId=? AND Password=?`;
+    console.log("request in login route", req.body)
+    console.log("email", req.body.emailid)
+    console.log("password", req.body.password)
+    console.log("secretkey",secretKey)
+    try {
+        db.query(sql, [req.body.emailid, req.body.password], (err, data) => {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                console.log(errors)
+                return res.json(errors)
             } else {
-                req.email = decoded.email,
-                    req.password = decoded.password;
-                next();
+                if (err) {
+                    console.log(err)
+                    return res.status(500).json({ error: "Database error" });
+                }
+                console.log( 'data in login route',data)
+                if (data.length > 0) {
+                    const email = data[0].EmailId;
+                    console.log(email)
+                    const password = data[0].Password;
+                    console.log(password)
+                    const role = data[0].Role;
+                    console.log(role)
+                    const token = jwt.sign({ email, password }, secretKey)
+                    res.cookie('token', token, { secure: true });
+                    //res.cookie('token', token)
+                    console.log('token', token)
+                    //return res.json('Success');
+                    //return res.json({
+                    //     "Message": "Login successfull",
+                    //     "token": token,
+                    //})
+                    return res.json({
+                        Message: "Login successful",
+                        Role: data[0].Role,
+                        Token: token
+                    });
+                }
+                else {
+                    return res.json('Failure')
+                }
             }
         })
+    } catch (e) {
+        console.log("error")
+        console.error(e)
     }
-}
+})
+
+
 
 router.get('/', verifyUser, (req, res) => {
-    return res.json({ Status: "Success", email: res.email, password: res.password })
+    return res.json({ Status: "Success", email: req.email })
 })
 
 
