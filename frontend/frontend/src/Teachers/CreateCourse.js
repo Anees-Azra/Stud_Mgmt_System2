@@ -45,14 +45,14 @@ const CreateCourse = () => {
       <div className="bg-white p-3 rounded w-25">
         <h2>Create Course</h2>
         <form action="" onSubmit={handleCreateCourse}>
-          <label htmlFor="courseid"><strong>Course Id :</strong></label>
+          {/* <label htmlFor="courseid"><strong>Course Id :</strong></label>
           <input
             type="text"
             placeholder="Enter Course Id"
             className="form-control rounded-0"
             onChange={(e) => setCourseId(e.target.value)}
             name="courseid"
-          />
+          /> */}
           <label htmlFor="coursename"><strong>Course Name :</strong></label>
           <input
             type="text"

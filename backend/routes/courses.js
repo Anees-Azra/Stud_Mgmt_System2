@@ -15,12 +15,12 @@ const app = express();
 app.use(express.json);
 
 router.use(verifyUser);
-router.post('/createcourse',(req, res) => {
+router.post('/createcourse',verifyUser,(req, res) => {
     console.log('in createcourse route')
-    const { CourseId, CourseName, IsDelete } = req.body;
+    const { CourseName, IsDelete } = req.body;
     console.log('req body', req.body)
-    const sql = 'insert into courses (CourseId , CourseName, IsDelete) values (?,?,?)';
-    const values = [CourseId, CourseName, 0]
+    const sql = 'insert into courses (CourseName, IsDelete) values (?,?)';
+    const values = [CourseName, 0]
     console.log('values', values)
     db.query(sql, values, (err, result) => {
         if (err) {
@@ -28,10 +28,10 @@ router.post('/createcourse',(req, res) => {
             return res.status(500).json({ Error: 'Database Error' })
         }
         //return res.json(values);
-        const createdCourseId = result.insertId;
+        //const createdCourseId = result.insertId;
 
         return res.json({
-            CourseId: createdCourseId,
+            //CourseId: createdCourseId,
             CourseName: CourseName,
             IsDelete: 0,
             Message: 'Course created successfully'

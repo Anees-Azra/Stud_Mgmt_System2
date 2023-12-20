@@ -76,8 +76,10 @@ const verifyUser = (req, res, next) => {
     } else {
         jwt.verify(token, secretKey, (err, decoded) => {
             if (err) {
+                console.log('Error is there' , err);
                 return res.status(401).json({ Error: "Token is not correct" });
             } else {
+                console.log('decoded' , decoded);
                 req.email = decoded.email;
                 req.password = decoded.password;
                 next();
