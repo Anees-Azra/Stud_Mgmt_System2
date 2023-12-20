@@ -9,6 +9,7 @@ import crypto from 'crypto';
 const router = express.Router();
 router.use(express.json());
 router.use(cookieParser());
+//router.use(verifyUser);
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -90,7 +91,7 @@ router.post('/login', (req, res) => {
 
 
 
-router.get('/', verifyUser, (req, res) => {
+router.get('/',verifyUser, (req, res) => {
     return res.json({ Status: "Success", email: req.email })
 })
 

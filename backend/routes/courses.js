@@ -10,12 +10,12 @@ const db = mysql.createConnection({
 })
 
 const router = express();
-router.use(verifyUser);
+
 const app = express();
 app.use(express.json);
 
-
-router.post('/createcourse', (req, res) => {
+router.use(verifyUser);
+router.post('/createcourse',(req, res) => {
     console.log('in createcourse route')
     const { CourseId, CourseName, IsDelete } = req.body;
     console.log('req body', req.body)

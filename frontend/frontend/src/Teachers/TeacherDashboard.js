@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import { Grid, Typography } from '@mui/material';
+import Drawer from './Drawer';
 
 const TeacherDashboard = () => {
   const navigate = useNavigate();
@@ -35,7 +36,11 @@ const TeacherDashboard = () => {
   return (
     <Grid container display="flex" flexDirection= "column" justifyContent="center"  alignItems= "center" >
     <Typography><h2>Teacher Dashboard</h2></Typography>
-    <Box sx={{ bgcolor: 'grey', width:'100%' , display: 'flex', justifyContent: 'space-around', borderWidth: 1, borderColor: 'red', borderStyle: 'solid' }}>
+    <Drawer />
+    <Box sx={{ bgcolor: 'grey', width:'100%' , display: 'flex', flexDirection:'column',
+    justifyContent: 'space-between', alignItems: 'center',
+     borderWidth: 1, borderColor: 'red', borderStyle: 'solid' }}>
+      <Box>
       <Button
         variant="contained"
         sx={{ color: 'white', backgroundColor: 'black', borderColor: 'green' }}
@@ -50,7 +55,9 @@ const TeacherDashboard = () => {
         onClick={handleUpdateCourseClick}>
         Update Course
       </Button>
-
+      </Box>
+      <br />
+      <Box>
       <Button variant="contained"
         sx={{ color: 'white', backgroundColor: 'black', borderColor: 'green' }}
         onClick={handleCreateThreadClick}>
@@ -62,12 +69,13 @@ const TeacherDashboard = () => {
         onClick={handleUpdateThreadClick}>
         Update Thread
       </Button>
-
-      <Button variant="contained"
+      </Box>
+      <br />
+       <Button variant="contained"
         sx={{ color: 'white', backgroundColor: 'black', borderColor: 'green' }}
         onClick={handleLogoutClick}>
         Log Out
-      </Button>
+      </Button> 
     </Box>
     </Grid>
     
