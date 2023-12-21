@@ -14,8 +14,8 @@ const router = express();
 const app = express();
 app.use(express.json);
 
-router.use(verifyUser);
-router.post('/createcourse',verifyUser,(req, res) => {
+//router.use(verifyUser);
+router.post('/createcourse',(req, res) => {
     console.log('in createcourse route')
     const { CourseName, IsDelete } = req.body;
     console.log('req body', req.body)

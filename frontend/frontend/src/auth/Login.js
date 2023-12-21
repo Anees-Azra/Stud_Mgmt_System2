@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Validation from './LoginValidation';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const Login = () => {
 
@@ -41,6 +43,10 @@ const Login = () => {
         axios.post('http://localhost:8080/routes/userauth/login', values)
             .then(res => {
                 console.log('in .then');
+                cookies.set("token", res.data.token, {
+                    path: "/",
+                  });
+                //window.location.href = "/";
                 if (res.data.errors) {
                     console.log(res.data.errors)
                     setBackendError(res.data.errors);
@@ -55,19 +61,16 @@ const Login = () => {
                             console.log('Navigating to /createcourse');
                             navigate('/teacherdashboard'); // Replace with the teacher route
                         }
-
                         else if (userRole === 'Student') {
                             console.log('userrole is', userRole)
                             console.log('Navigating to /');
                             navigate('/'); // Replace with the student route
                         }
-
                         //navigate('/');
                         console.log('after navigation');
                     } else {
                         alert('No record existed');
                     }
-
                     // Assuming the role information is available in the response
                     // const userRole = res.data.role;
                     // if (userRole === 'Teacher') {

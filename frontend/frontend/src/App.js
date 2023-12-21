@@ -8,6 +8,7 @@ import CreateCourse from './Teachers/CreateCourse';
 import CreateThread from './Teachers/CreateThread';
 import UpdateCourse from './Teachers/UpdateCourse';
 import UpdateThread from './Teachers/UpdateThread';
+import ProtectedRoute from './ProtectedRoute';
 
 
 //import CourseForm from './TeacherDashboard/CourseForm';
@@ -16,15 +17,17 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Home />} />
+            {/* <ProtectedRoute exact path="/"><Home /></ProtectedRoute> */}
+                {/* <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute> }/> */}
+                <Route path='/' element={<Home />} /> 
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
                 {/* <Route path= '/courseform' element={<CourseForm />}/> */}
                 <Route path='/teacherdashboard' element={<TeacherDashboard />} />
-                <Route path='/createcourse' element={<CreateCourse />} />
-                <Route path='/updatecourse' element={<UpdateCourse />} />
-                <Route path='/createthread' element={<CreateThread />} />
-                <Route path='/updatethread' element={<UpdateThread />} />
+                <Route path='/createcourse' element={<ProtectedRoute><CreateCourse /></ProtectedRoute>} />
+                <Route path='/updatecourse' element={<ProtectedRoute><UpdateCourse /></ProtectedRoute>} />
+                <Route path='/createthread' element={<ProtectedRoute><CreateThread /></ProtectedRoute>} />
+                <Route path='/updatethread' element={<ProtectedRoute><UpdateThread /></ProtectedRoute>} />
             </Routes>
         </BrowserRouter>
         //<Home />
