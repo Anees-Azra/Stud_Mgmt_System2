@@ -17,8 +17,11 @@
     "react": "^18.2.0",
     "react-datepicker": "^4.21.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "react-popupbox": "^2.0.9",
     "react-router-dom": "^6.21.0",
     "react-scripts": "5.0.1",
+    "reactjs-popup": "^2.0.6",
     "universal-cookie": "^6.1.1",
     "web-vitals": "^2.1.4"
   },

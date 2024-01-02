@@ -1,6 +1,6 @@
 import express from 'express';
 import mysql from 'mysql';
-import verifyUser from '../middleware/verifyUser.js'
+//import verifyUser from '../middleware/verifyUser.js'
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -43,6 +43,7 @@ router.post('/createcourse',(req, res) => {
 
 
 router.get('/readallcourses', (req, res) => {
+    console.log('in readallcourses')
     const sql = 'select * from courses';
     db.query(sql, (err, data) => {
         if (err) {
@@ -50,6 +51,7 @@ router.get('/readallcourses', (req, res) => {
             return res.status(500).json({ Error: "Database Error" });
         }
         return res.json(data)
+    
     })
 })
 

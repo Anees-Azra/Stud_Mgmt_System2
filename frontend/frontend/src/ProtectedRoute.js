@@ -9,13 +9,14 @@ const ProtectedRoute = ({ children }) => {
 
   const checkUserToken = () => {
     const userToken = cookies.get("token");
-    console.log(userToken);
+    console.log('usertoken',userToken);
     //const userToken = JSON.parse(localStorage.getItem('token'));
     if (!userToken || userToken === undefined) {
       setIsLoggedIn(false);
       return navigate('/');
     }
     setIsLoggedIn(true);
+    console.log('is logged in')
   };
 
   useEffect(() => {
