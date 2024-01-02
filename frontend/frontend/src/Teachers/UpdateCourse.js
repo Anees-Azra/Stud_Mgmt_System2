@@ -33,6 +33,10 @@ const UpdateCourse = () => {
   return (
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className="bg-white p-3 rounded w-25">
+      <h2>List Of Available Courses</h2>
+        <Link to='/dialogupdatecourse' className='btn btn-primary w-100 rounded 0'>
+          List of Courses
+        </Link>
         <h2>Update Course</h2>
         <form action="" onSubmit={handleUpdateCourse}>
           <label htmlFor="courseid"><strong>Course Id :</strong></label>

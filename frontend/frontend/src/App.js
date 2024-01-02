@@ -10,6 +10,8 @@ import UpdateCourse from './Teachers/UpdateCourse';
 import UpdateThread from './Teachers/UpdateThread';
 import ProtectedRoute from './ProtectedRoute';
 import Dialogcourse from './Teachers/Dialogcourse';
+import DialogUpdatecourse from './Teachers/DialogUpdatecourse';
+import DialogUpdatethread from './Teachers/DialogUpdatethread';
 import Dialogthread from './Teachers/Dialogthread';
 
 
@@ -26,6 +28,8 @@ const App = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/dialogcourse' element={<Dialogcourse />} />
                 <Route path='/dialogthread' element={<Dialogthread />} />
+                <Route path='/dialogupdatecourse' element={<DialogUpdatecourse />} />
+                <Route path='/dialogupdatethread' element={<DialogUpdatethread />} />
                 {/* <Route path= '/courseform' element={<CourseForm />}/> */}
                 <Route path='/teacherdashboard' element={<TeacherDashboard />} />
                 <Route path='/createcourse' element={<ProtectedRoute><CreateCourse /></ProtectedRoute>} />
