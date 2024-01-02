@@ -8,7 +8,6 @@ import cors from 'cors';
 
 const app = express();
 
-// Use the cors middleware
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
