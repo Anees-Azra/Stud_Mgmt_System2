@@ -1,12 +1,12 @@
 import React from 'react';
 import CourseList from './CourseList';
+import ThreadList from './ThreadList';
 
-const Dialog = () => {
+const Dialogcourse = () => {
   return (
-    //<div>Dialog</div>
     <CourseList />
   )
 }
 
-export default Dialog
+export default Dialogcourse
 
