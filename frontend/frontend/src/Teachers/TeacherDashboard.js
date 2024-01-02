@@ -9,7 +9,6 @@ const TeacherDashboard = () => {
   const navigate = useNavigate();
 
   const handleCreateCourseClick = () => {
-    // Navigate to the route for creating a course
     navigate('/createcourse');
   };
 

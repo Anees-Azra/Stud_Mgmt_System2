@@ -6,8 +6,6 @@ import rolesRoute from './routes/roles.js';
 import threadsRoute from './routes/threads.js'
 import cors from 'cors';
 
-//Made changes in backend
-
 const app = express();
 
 // Use the cors middleware
