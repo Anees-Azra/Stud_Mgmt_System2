@@ -7,7 +7,7 @@ import threadsRoute from './routes/threads.js'
 import cors from 'cors';
 
 const app = express();
-
+//const
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
