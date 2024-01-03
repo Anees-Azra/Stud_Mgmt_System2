@@ -30,6 +30,9 @@ const App = () => {
                 <Route path='/teacherdashboard' element={<TeacherDashboard />} />
                 <Route path='/createcourse' element={<ProtectedRoute><CreateCourse /></ProtectedRoute>} />
                 <Route path='/updatecourse' element={<ProtectedRoute><UpdateCourse /></ProtectedRoute>} />
+                {/* <Route path="/updatecourse/:courseId" component={<ProtectedRoute><UpdateCourse /></ProtectedRoute>} />  */}
+                <Route path="/updatecourse/:courseId" component={UpdateCourse} />
+
                 <Route path='/createthread' element={<ProtectedRoute><CreateThread /></ProtectedRoute>} />
                 <Route path='/updatethread' element={<ProtectedRoute><UpdateThread /></ProtectedRoute>} />
             </Routes>

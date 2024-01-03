@@ -15,7 +15,7 @@ app.use(cors({
     optionsSuccessStatus: 204,
 }));
 
-// Parse incoming JSON requests
+
 app.use(express.json());
 
 

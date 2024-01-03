@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link,useParams} from 'react-router-dom';
 
 const CreateCourse = () => {
   console.log('in create course');
   const [CourseId, setCourseId] = useState('');
   const [CourseName, setCourseName] = useState('');
+  const {courseIdFromURL} = useParams();
+  
 
   const handleCreateCourse = (e) => {
     console.log('in handlecreatecourse');
