@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link,useParams} from 'react-router-dom';
+import { Link,useParams,useNavigate} from 'react-router-dom';
 
 const CreateCourse = () => {
   console.log('in create course');
   const [CourseId, setCourseId] = useState('');
   const [CourseName, setCourseName] = useState('');
   const {courseIdFromURL} = useParams();
+  const navigate = useNavigate();
   
 
   const handleCreateCourse = (e) => {
@@ -18,7 +19,8 @@ const CreateCourse = () => {
     })
       .then((res) => {
         console.log('Course is created');
-        alert('Course is Created')
+        alert('Course is Created');
+        navigate('/courselist')
       })
       .catch((err) => {
         console.error(err);

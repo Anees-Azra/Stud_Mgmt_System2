@@ -48,8 +48,11 @@ const UpdateCourseList = () => {
           </table>
         </div>
         <br />
-        <Link to='/teacherdashboard' className='btn btn-primary w-30 rounded 0 float-end'>
+        <Link to='/teacherdashboard' className='btn btn-primary w-30 rounded 0 float-start'>
           Teacher Dashboard
+        </Link>
+        <Link to='/updatecourse' className='btn btn-primary w-25 rounded-0 float-end'>
+          Back
         </Link>
       </div>
     </div>

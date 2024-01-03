@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link , useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const UpdateCourse = () => {
   const [CourseId, setCourseId] = useState(''); // Assuming you get this from user input
   const [CourseName, setCourseName] = useState('');
+  const navigate = useNavigate();
 
   const handleUpdateCourse = (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ const UpdateCourse = () => {
       .then((res) => {
         console.log('Course is updated');
         alert('Course is Updated');
+        navigate('/updatecourselist')
       })
       .catch((err) => {
         console.error(err);

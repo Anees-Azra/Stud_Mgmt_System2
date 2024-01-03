@@ -13,6 +13,8 @@ import Dialogcourse from './Teachers/Dialogcourse';
 import DialogUpdatecourse from './Teachers/DialogUpdatecourse';
 import DialogUpdatethread from './Teachers/DialogUpdatethread';
 import Dialogthread from './Teachers/Dialogthread';
+import CourseList from './Teachers/CourseList';
+import UpdateCourseList from './Teachers/UpdateCourseList';
 
 const App = () => {
     return (
@@ -28,6 +30,8 @@ const App = () => {
                 <Route path='/dialogupdatecourse' element={<DialogUpdatecourse />} />
                 <Route path='/dialogupdatethread' element={<DialogUpdatethread />} />
                 <Route path='/teacherdashboard' element={<TeacherDashboard />} />
+                <Route path='/courselist' element={<CourseList />} />
+                <Route path='/updatecourselist' element={<UpdateCourseList />} />
                 <Route path='/createcourse' element={<ProtectedRoute><CreateCourse /></ProtectedRoute>} />
                 <Route path='/updatecourse' element={<ProtectedRoute><UpdateCourse /></ProtectedRoute>} />
                 {/* <Route path="/updatecourse/:courseId" component={<ProtectedRoute><UpdateCourse /></ProtectedRoute>} />  */}
