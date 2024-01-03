@@ -14,9 +14,6 @@ import DialogUpdatecourse from './Teachers/DialogUpdatecourse';
 import DialogUpdatethread from './Teachers/DialogUpdatethread';
 import Dialogthread from './Teachers/Dialogthread';
 
-
-
-
 const App = () => {
     return (
         <BrowserRouter>

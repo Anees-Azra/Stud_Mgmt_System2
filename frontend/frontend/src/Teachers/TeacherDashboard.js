@@ -8,35 +8,35 @@ import Drawer from './Drawer';
 const TeacherDashboard = () => {
   const navigate = useNavigate();
 
-  const handleCreateCourseClick = () => {
-    navigate('/createcourse');
-  };
+  // const handleCreateCourseClick = () => {
+  //   navigate('/createcourse');
+  // };
 
-  const handleUpdateCourseClick = () => {
-    // Navigate to the route for creating a course
-    navigate('/updatecourse');
-  };
+  // const handleUpdateCourseClick = () => {
+  //   // Navigate to the route for creating a course
+  //   navigate('/updatecourse');
+  // };
 
-  const handleCreateThreadClick = () => {
-    // Navigate to the route for creating a course
-    navigate('/createthread');
-  };
+  // const handleCreateThreadClick = () => {
+  //   // Navigate to the route for creating a course
+  //   navigate('/createthread');
+  // };
 
-  const handleUpdateThreadClick = () => {
-    // Navigate to the route for creating a course
-    navigate('/updatethread');
-  };
+  // const handleUpdateThreadClick = () => {
+  //   // Navigate to the route for creating a course
+  //   navigate('/updatethread');
+  // };
 
-  const handleLogoutClick = () => {
-    // Navigate to the route for creating a course
-    navigate('/');
-  };
+  // const handleLogoutClick = () => {
+  //   // Navigate to the route for creating a course
+  //   navigate('/');
+  // };
 
   return (
     <Grid container display="flex" flexDirection= "column" justifyContent="center"  alignItems= "center" >
-    <Typography><h2>Teacher Dashboard</h2></Typography>
+    {/* <Typography><h2>Teacher Dashboard</h2></Typography> */}
     <Drawer />
-    <Box sx={{ bgcolor: 'grey', width:'100%' , display: 'flex', flexDirection:'column',
+    {/* <Box sx={{ bgcolor: 'grey', width:'100%' , display: 'flex', flexDirection:'column',
     justifyContent: 'space-between', alignItems: 'center',
      borderWidth: 1, borderColor: 'red', borderStyle: 'solid' }}>
       <Box>
@@ -75,7 +75,7 @@ const TeacherDashboard = () => {
         onClick={handleLogoutClick}>
         Log Out
       </Button> 
-    </Box>
+    </Box> */}
     </Grid>
     
   )

@@ -31,11 +31,9 @@ const ResponsiveDrawer = () => {
   }
 
   const drawer = (
-    <div>
+    <div >
       <Toolbar />
-      <Divider />
-      
-      <Box sx={{ width:'100%' , display: 'flex', flexDirection:'column',
+    <Box sx={{width:'100%' , display: 'flex', flexDirection:'column',
     justifyContent: 'space-between', alignItems: 'center',
      }}> 
       
@@ -69,7 +67,7 @@ const ResponsiveDrawer = () => {
         <strong> Update Thread</strong> 
       </Button>
       
-      </Box>
+    </Box>
     </div>
   );
 
@@ -92,7 +90,7 @@ const ResponsiveDrawer = () => {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { sm: drawerWidth },height:'100%', flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
        
