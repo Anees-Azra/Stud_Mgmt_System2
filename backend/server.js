@@ -18,7 +18,7 @@ app.use(cors({
 // Parse incoming JSON requests
 app.use(express.json());
 
-// Use the userauth route
+
 app.use('/routes/userauth', userauthRoute);
 app.use('/routes/user', userRoute);
 app.use('/routes/courses', coursesRoute);

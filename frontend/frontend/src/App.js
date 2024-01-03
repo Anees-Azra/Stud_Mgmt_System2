@@ -27,7 +27,6 @@ const App = () => {
                 <Route path='/dialogthread' element={<Dialogthread />} />
                 <Route path='/dialogupdatecourse' element={<DialogUpdatecourse />} />
                 <Route path='/dialogupdatethread' element={<DialogUpdatethread />} />
-                {/* <Route path= '/courseform' element={<CourseForm />}/> */}
                 <Route path='/teacherdashboard' element={<TeacherDashboard />} />
                 <Route path='/createcourse' element={<ProtectedRoute><CreateCourse /></ProtectedRoute>} />
                 <Route path='/updatecourse' element={<ProtectedRoute><UpdateCourse /></ProtectedRoute>} />
