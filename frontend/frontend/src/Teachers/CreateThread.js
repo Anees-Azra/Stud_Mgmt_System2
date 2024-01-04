@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
 
 const CreateThread = () => {
   console.log('in create thread');
@@ -9,6 +9,7 @@ const CreateThread = () => {
   const [ThreadId, setThreadId] = useState('');
   const [ThreadStartDate, setThreadStartDate] = useState('');
   const [ThreadHeading, setThreadHeading] = useState('');
+  const navigate = useNavigate();
 
 
   const handleCreateThread = (e) => {
@@ -27,6 +28,7 @@ const CreateThread = () => {
       .then((res) => {
         console.log('Thread is created');
         alert('Thread is Created')
+        navigate('/threadlist')
       })
       .catch((err) => {
         console.error(err);
@@ -76,14 +78,14 @@ const CreateThread = () => {
             name="courseid"
           />
 
-          <label htmlFor="courseid"><strong>Thread Id :</strong></label>
+          {/* <label htmlFor="courseid"><strong>Thread Id :</strong></label>
           <input
             type="text"
             placeholder="Enter Course name"
             className="form-control rounded-0"
             onChange={(e) => setThreadId(e.target.value)}
             name="threadid"
-          />
+          /> */}
 
           <label htmlFor="threadstartdate"><strong>Thread Start Date :</strong></label>
           <input
@@ -119,9 +121,3 @@ const CreateThread = () => {
 };
 
 export default CreateThread;
-
-
-
-
-
-

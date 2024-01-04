@@ -25,14 +25,40 @@ const ThreadList = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
-      <div className='bg-white p-3 rounded w-50'>
+      <div className='bg-white p-3 rounded w-80'>
         <h2>LIST OF AVAILABLE THREADS :</h2>
-        {threads.map((thread) => (
+        {/* {threads.map((thread) => (
           <ol key={thread.ThreadId}>
             {`ThreadId: ${thread.ThreadId}, ThreadHeading: ${thread.ThreadHeading}`}
           </ol>
-        ))}
-        <Link to='/createthread' className=' btn btn-primary w-25 rounded-0 float-end' >Back</Link>
+        ))} */}
+        <div className='container'>
+          <table className='table table-stiped'>
+            <thead>
+              <tr>
+                <th>UIN :</th>
+                <th>CourseId:</th>
+                <th>ThreadId:</th>
+                <th>ThreadStartDate :</th>
+                <th>ThreadHeading :</th>
+              </tr>
+            </thead>
+            <tbody>
+              {threads.map((thread) =>
+                <tr>
+                  <td>{thread.UIN}</td>
+                  <td>{thread.CourseId}</td>
+                  <td>{thread.ThreadId}</td>
+                  <td>{thread.ThreadStartDate}</td>
+                  <td>{thread.ThreadHeading}</td>
+                </tr>
+              )}
+
+            </tbody>
+          </table>
+        </div>
+        <Link to='/createthread' className=' btn btn-primary w-25 rounded-0 float-end' >Add New Thread</Link>
+        <Link to ='/teacherdashboard' className='btn btn-primary w-25 rounded-0 float-start'>Teacher Dashboard</Link>
       </div>
     </div>
   );

@@ -53,7 +53,7 @@ const CreateCourse = () => {
         <h2>Create Course</h2>
         <form action="" onSubmit={handleCreateCourse}>
           {/* <label htmlFor="courseid"><strong>Course Id :</strong></label>
-          <input
+          <inputn
             type="text"
             placeholder="Enter Course Id"
             className="form-control rounded-0"

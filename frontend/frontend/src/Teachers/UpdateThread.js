@@ -44,11 +44,11 @@ const UpdateThread = () => {
 console.log('after axios')
   return (
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
-      <div className="bg-white p-3 rounded w-25">
+      <div className="bg-white p-3 rounded w-40">
       <h2>List Of Available Threads :</h2>
         <Link to = '/dialogupdatethread' className='btn btn-primary w-100 rounded 0'>
           List of Threads</Link>
-        <h2>Updations For a Thread</h2>
+        <h2>Updations For a Thread :</h2>
         <form action="" onSubmit={handleUpdateThread}>
           <label htmlFor='uin'><strong>UIN :</strong></label>
           <input

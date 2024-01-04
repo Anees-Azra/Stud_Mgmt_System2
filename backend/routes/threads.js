@@ -1,6 +1,6 @@
 import express from 'express';
 import mysql from 'mysql';
-import verifyUser from '../middleware/verifyUser.js'
+//import verifyUser from '../middleware/verifyUser.js'
 
 const app = express();
 const router = express();
@@ -13,11 +13,11 @@ const db = mysql.createConnection({
     database: 'stud_database'
 })
 
-router.post('/createthread',verifyUser, (req, res) => {
-    const { UIN, CourseId, ThreadId, ThreadStartDate, ThreadHeading, IsDelete } = req.body;
+router.post('/createthread', (req, res) => {
+    const { UIN, CourseId, ThreadStartDate, ThreadHeading, IsDelete } = req.body;
     console.log(req.body.UIN);
-    const sql = 'insert into threads(UIN, CourseId, ThreadId, ThreadStartDate, ThreadHeading, IsDelete) values (?,?,?,?,?,?)';
-    const values = [UIN, CourseId, ThreadId, ThreadStartDate, ThreadHeading, IsDelete]
+    const sql = 'insert into threads(UIN, CourseId, ThreadStartDate, ThreadHeading, IsDelete) values (?,?,?,?,?)';
+    const values = [UIN, CourseId, ThreadStartDate, ThreadHeading, IsDelete]
     console.log(values);
     console.log('query', sql);
     console.log('values', values);

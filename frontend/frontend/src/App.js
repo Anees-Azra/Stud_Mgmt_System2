@@ -15,6 +15,7 @@ import DialogUpdatethread from './Teachers/DialogUpdatethread';
 import Dialogthread from './Teachers/Dialogthread';
 import CourseList from './Teachers/CourseList';
 import UpdateCourseList from './Teachers/UpdateCourseList';
+import ThreadList from './Teachers/ThreadList';
 
 const App = () => {
     return (
@@ -27,6 +28,7 @@ const App = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/dialogcourse' element={<Dialogcourse />} />
                 <Route path='/dialogthread' element={<Dialogthread />} />
+                <Route path='/threadlist' element={<ThreadList />} />
                 <Route path='/dialogupdatecourse' element={<DialogUpdatecourse />} />
                 <Route path='/dialogupdatethread' element={<DialogUpdatethread />} />
                 <Route path='/teacherdashboard' element={<TeacherDashboard />} />
