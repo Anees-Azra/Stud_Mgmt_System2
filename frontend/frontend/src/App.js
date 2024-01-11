@@ -14,8 +14,9 @@ import DialogUpdatecourse from './Teachers/DialogUpdatecourse';
 import DialogUpdatethread from './Teachers/DialogUpdatethread';
 import Dialogthread from './Teachers/Dialogthread';
 import CourseList from './Teachers/CourseList';
-import UpdateCourseList from './Teachers/UpdateCourseList';
 import ThreadList from './Teachers/ThreadList';
+import UpdateCourseList from './Teachers/UpdateCourseList';
+import UpdateThreadList from './Teachers/UpdateThreadList';
 
 const App = () => {
     return (
@@ -34,9 +35,10 @@ const App = () => {
                 <Route path='/teacherdashboard' element={<TeacherDashboard />} />
                 <Route path='/courselist' element={<CourseList />} />
                 <Route path='/updatecourselist' element={<UpdateCourseList />} />
+                <Route path='/updatethreadlist' element={<UpdateThreadList />} />
                 <Route path='/createcourse' element={<ProtectedRoute><CreateCourse /></ProtectedRoute>} />
                 <Route path='/updatecourse' element={<ProtectedRoute><UpdateCourse /></ProtectedRoute>} />
-                <Route path="/updatecourse/:courseId" component={UpdateCourse} />
+                <Route path="/updatecourse/:courseId" element={<UpdateCourse />} />
                 <Route path='/createthread' element={<ProtectedRoute><CreateThread /></ProtectedRoute>} />
                 <Route path='/updatethread' element={<ProtectedRoute><UpdateThread /></ProtectedRoute>} />
             </Routes>
@@ -45,5 +47,3 @@ const App = () => {
     )
 }
 export default App;
-
-

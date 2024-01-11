@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link,useParams,useNavigate} from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 const CreateCourse = () => {
   console.log('in create course');
   const [CourseId, setCourseId] = useState('');
   const [CourseName, setCourseName] = useState('');
-  const {courseIdFromURL} = useParams();
+  const { courseIdFromURL } = useParams();
   const navigate = useNavigate();
-  
+
 
   const handleCreateCourse = (e) => {
     console.log('in handlecreatecourse');
@@ -27,39 +27,15 @@ const CreateCourse = () => {
       });
   };
 
-  const handleLogout = (e) => {
-    console.log('in handlelogout');
-    e.preventDefault();
-    axios
-      .post('http://localhost:8080/routes/userauth/logout')
-      .then((res) => {
-        console.log('Logout successfull');
-        alert('You are logged out')
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    // Handle logout logic here
-    console.log('Logging out');
-  };
-
   return (
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className="bg-white p-3 rounded w-25">
         <h2>List Of Available Courses</h2>
-        <Link to='/dialogcourse' className='btn btn-primary w-100 rounded 0'>
+        <Link to='/courselist' className='btn btn-primary w-100 rounded 0'>
           List of Courses
         </Link>
         <h2>Create Course</h2>
         <form action="" onSubmit={handleCreateCourse}>
-          {/* <label htmlFor="courseid"><strong>Course Id :</strong></label>
-          <inputn
-            type="text"
-            placeholder="Enter Course Id"
-            className="form-control rounded-0"
-            onChange={(e) => setCourseId(e.target.value)}
-            name="courseid"
-          /> */}
           <label htmlFor="coursename"><strong>Course Name :</strong></label>
           <input
             type="text"
@@ -84,4 +60,5 @@ const CreateCourse = () => {
 };
 
 export default CreateCourse;
+
 

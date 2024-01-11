@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button'
+//import Button from '@mui/material/Button'
 
 const ThreadList = () => {
   const [threads, setThreads] = useState([]);
@@ -53,7 +53,8 @@ const ThreadList = () => {
                   <td>{thread.ThreadId}</td>
                   <td>{thread.ThreadStartDate}</td>
                   <td>{thread.ThreadHeading}</td>
-                  <td><Button className='btn btn-outlined-danger w-20 rounded-0'>Update</Button></td>
+                  <td><Link to ='/updatethread' className='btn btn-outlined-danger w-20 rounded-0'>
+                  Update</Link></td>
                 </tr>
               )}
             </tbody>

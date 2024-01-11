@@ -33,7 +33,7 @@ const CourseList = () => {
             <thead>
               <tr>
                 <th>Course Id</th>
-                <th>Course Course</th>
+                <th>Course Name</th>
               </tr>
             </thead>
             <tbody>
@@ -56,4 +56,5 @@ const CourseList = () => {
 };
 
 export default CourseList;
+  
 
