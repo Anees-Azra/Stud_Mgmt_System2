@@ -39,6 +39,7 @@ const App = () => {
                 <Route path='/createcourse' element={<ProtectedRoute><CreateCourse /></ProtectedRoute>} />
                 <Route path='/updatecourse' element={<ProtectedRoute><UpdateCourse /></ProtectedRoute>} />
                 <Route path="/updatecourse/:courseId" element={<UpdateCourse />} />
+                <Route path="/updatethread/:UIN" element={<UpdateThread />} />
                 <Route path='/createthread' element={<ProtectedRoute><CreateThread /></ProtectedRoute>} />
                 <Route path='/updatethread' element={<ProtectedRoute><UpdateThread /></ProtectedRoute>} />
             </Routes>

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const UpdateCourse = () => {
   console.log('in update course')
-  const {courseId} = useParams();
+  const { courseId } = useParams();
   //const [CourseId, setCourseId] = useState(''); // Assuming you get this from user input
   const [CourseName, setCourseName] = useState('');
   const navigate = useNavigate();
@@ -24,10 +24,10 @@ const UpdateCourse = () => {
     axios
       .put(`http://localhost:8080/routes/courses/updatecourse/${parsedCourseId}`, {
         //.put(`http://localhost:8080/routes/courses/updatecourse/CourseId`, {
-          CourseId: parsedCourseId,
+        CourseId: parsedCourseId,
         CourseName: CourseName,
       })
-     
+
       .then((res) => {
         console.log('Course is updated');
         alert('Course is Updated');
@@ -51,7 +51,7 @@ const UpdateCourse = () => {
           <input
             type="text"
             placeholder="Enter Course Id"
-            value = {courseId}
+            value={courseId}
             readOnly
             className="form-control rounded-0"
             //onChange={(e) => setCourseId(e.target.value)}

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link , useNavigate } from 'react-router-dom';
+import { Link , useNavigate ,useParams} from 'react-router-dom';
 import axios from 'axios';
 
 const UpdateThread = () => {
   console.log('in updatethread component')
-  const [UIN, setUIN] = useState('');
+  const {courseUIN} = useParams();
   const [CourseId, setCourseId] = useState('');
   const [ThreadId, setThreadId] = useState('');
   const [ThreadStartDate, setThreadStartDate] = useState('');
@@ -16,8 +16,8 @@ const UpdateThread = () => {
     e.preventDefault();
 
     // Check if CourseId is a valid integer
-    //const parsedUIN = parseInt(UIN, 10);
-    const parsedUIN = UIN;
+    clconst parsedUIN = parseInt(UIN, 10);
+    //const parsedUIN = courseUIN;
     if (isNaN(parsedUIN)) {
       alert('Invalid UIN. Please enter a valid UIN.');
       return;
@@ -56,8 +56,10 @@ console.log('after axios')
           <input
             type='text'
             placeholder="Enter UIN"
+            value = {courseUIN}
+            readOnly
             className="form-control rounded-0"
-            onChange={(e) => setUIN(e.target.value)}
+            //onChange={(e) => setUIN(e.target.value)}
             name="uin"
           />
 

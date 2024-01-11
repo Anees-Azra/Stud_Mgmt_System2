@@ -53,7 +53,7 @@ const ThreadList = () => {
                   <td>{thread.ThreadId}</td>
                   <td>{thread.ThreadStartDate}</td>
                   <td>{thread.ThreadHeading}</td>
-                  <td><Link to ='/updatethread' className='btn btn-outlined-danger w-20 rounded-0'>
+                  <td><Link to ={`/updatethread/${thread.UIN}`} className='btn btn-outlined-danger w-20 rounded-0'>
                   Update</Link></td>
                 </tr>
               )}
