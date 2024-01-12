@@ -9,10 +9,10 @@ import CreateThread from './Teachers/CreateThread';
 import UpdateCourse from './Teachers/UpdateCourse';
 import UpdateThread from './Teachers/UpdateThread';
 import ProtectedRoute from './ProtectedRoute';
-import Dialogcourse from './Teachers/Dialogcourse';
-import DialogUpdatecourse from './Teachers/DialogUpdatecourse';
-import DialogUpdatethread from './Teachers/DialogUpdatethread';
-import Dialogthread from './Teachers/Dialogthread';
+//import Dialogcourse from './Teachers/Dialogcourse';
+// import DialogUpdatecourse from './Teachers/DialogUpdatecourse';
+// import DialogUpdatethread from './Teachers/DialogUpdatethread';
+// import Dialogthread from './Teachers/Dialogthread';
 import CourseList from './Teachers/CourseList';
 import ThreadList from './Teachers/ThreadList';
 import UpdateCourseList from './Teachers/UpdateCourseList';
@@ -27,13 +27,9 @@ const App = () => {
                 <Route path='/' element={<Home />} /> 
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='/dialogcourse' element={<Dialogcourse />} />
-                <Route path='/dialogthread' element={<Dialogthread />} />
-                <Route path='/threadlist' element={<ThreadList />} />
-                <Route path='/dialogupdatecourse' element={<DialogUpdatecourse />} />
-                <Route path='/dialogupdatethread' element={<DialogUpdatethread />} />
                 <Route path='/teacherdashboard' element={<TeacherDashboard />} />
                 <Route path='/courselist' element={<CourseList />} />
+                <Route path='/threadlist' element={<ThreadList />} />
                 <Route path='/updatecourselist' element={<UpdateCourseList />} />
                 <Route path='/updatethreadlist' element={<UpdateThreadList />} />
                 <Route path='/createcourse' element={<ProtectedRoute><CreateCourse /></ProtectedRoute>} />

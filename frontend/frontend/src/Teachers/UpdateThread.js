@@ -16,7 +16,7 @@ const UpdateThread = () => {
     e.preventDefault();
 
     // Check if CourseId is a valid integer
-    clconst parsedUIN = parseInt(UIN, 10);
+    const parsedUIN = parseInt(courseUIN, 10);
     //const parsedUIN = courseUIN;
     if (isNaN(parsedUIN)) {
       alert('Invalid UIN. Please enter a valid UIN.');
@@ -57,7 +57,7 @@ console.log('after axios')
             type='text'
             placeholder="Enter UIN"
             value = {courseUIN}
-            readOnly
+            //readOnly
             className="form-control rounded-0"
             //onChange={(e) => setUIN(e.target.value)}
             name="uin"
@@ -67,6 +67,7 @@ console.log('after axios')
           <input
             type="text"
             placeholder="Enter Thread Id"
+            value = {CourseId}
             className="form-control rounded-0"
             onChange={(e) => setCourseId(e.target.value)}
             name="courseid"

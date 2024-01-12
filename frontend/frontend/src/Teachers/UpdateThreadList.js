@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-//import Button from '@mui/material/Button'
 
 const ThreadList = () => {
   const [threads, setThreads] = useState([]);
@@ -28,17 +27,12 @@ const ThreadList = () => {
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className='bg-white p-3 rounded w-80'>
         <h2>LIST OF AVAILABLE THREADS :</h2>
-        {/* {threads.map((thread) => (
-          <ol key={thread.ThreadId}>
-            {`ThreadId: ${thread.ThreadId}, ThreadHeading: ${thread.ThreadHeading}`}
-          </ol>
-        ))} */}
-        <div className='d-flex justify-content-center align-items-center vh100'>
-          <table className='table table-striped'>
+         <div className='container'>
+          <table className='table table-stiped'>
             <thead>
               <tr>
                 <th>UIN :</th>
-                <th>CourseId:</th>
+                <th>Course Name:</th>
                 <th>ThreadId:</th>
                 <th>ThreadStartDate :</th>
                 <th>ThreadHeading :</th>
@@ -53,15 +47,15 @@ const ThreadList = () => {
                   <td>{thread.ThreadId}</td>
                   <td>{thread.ThreadStartDate}</td>
                   <td>{thread.ThreadHeading}</td>
-                  <td><Link to ={`/updatethread/${thread.UIN}`} className='btn btn-outlined-danger w-20 rounded-0'>
-                  Update</Link></td>
+                  <td><Link to ={`/updatethread/${thread.UIN}`} className='btn btn-outline-danger w-20 rounded-0'>
+                       Update</Link></td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
-        <Link to='/updatethread' className=' btn btn-primary w-20 rounded-0 float-end' >Update Thread</Link>
-        <Link to = '/teacherdashboard' className='btn btn-primary w-30 rounded-0 float-start'>Teacher Dashboard</Link>
+        <Link to='/createthread' className=' btn btn-primary w-25 rounded-0 float-end' >Back</Link>
+        <Link to ='/teacherdashboard' className='btn btn-primary w-25 rounded-0 float-start'>Teacher Dashboard</Link>
       </div>
     </div>
   );
