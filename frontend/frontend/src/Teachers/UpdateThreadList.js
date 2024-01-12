@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const ThreadList = () => {
+const UpdateThreadList = () => {
   const [threads, setThreads] = useState([]);
 
   useEffect(() => {
@@ -61,5 +61,4 @@ const ThreadList = () => {
   );
 };
 
-export default ThreadList;
-
+export default UpdateThreadList
