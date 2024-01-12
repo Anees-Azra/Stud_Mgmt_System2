@@ -1,6 +1,8 @@
 import express from 'express';
 import mysql from 'mysql';
 
+//add comments
+
 const app = express();
 const router = express();
 app.use(express.json);

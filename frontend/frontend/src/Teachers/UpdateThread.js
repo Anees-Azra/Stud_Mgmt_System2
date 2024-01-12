@@ -57,7 +57,7 @@ console.log('after axios')
             type='text'
             placeholder="Enter UIN"
             value = {courseUIN}
-            //readOnly
+            readOnly
             className="form-control rounded-0"
             //onChange={(e) => setUIN(e.target.value)}
             name="uin"
