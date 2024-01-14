@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import CourseListStyles from '../styles/CourseListStyles.css'
 
 const UpdateCourseList = () => {
   const [courses, setCourses] = useState([]);
@@ -32,7 +33,8 @@ const UpdateCourseList = () => {
             </thead>
             <tbody>
               {courses.map((course) => (
-                <tr key={course.CourseId}>
+                <tr>
+                {/* </tr><tr key={course.CourseId}> */}
                   <td>{course.CourseId}</td>
                   <td>{course.CourseName}</td>
                   <td>

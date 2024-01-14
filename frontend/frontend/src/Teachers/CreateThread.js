@@ -5,6 +5,7 @@ import { Link , useNavigate } from 'react-router-dom';
 
 const CreateThread = () => {
   console.log('in create thread');
+  const[Courses,setCourses] = useState([]);
   const [UIN, setUIN] = useState('');
   const [CourseId, setCourseId] = useState('');
   const [ThreadId, setThreadId] = useState('');
@@ -36,22 +37,6 @@ const CreateThread = () => {
       });
   };
 
-  const handleLogout = (e) => {
-    console.log('in handlelogout');
-    e.preventDefault();
-    axios
-      .post('http://localhost:8080/routes/userauth/logout')
-      .then((res) => {
-        console.log('Logout successfull');
-        alert('You are logged out')
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    // Handle logout logic here
-    console.log('Logging out');
-  };
-
   return (
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className="bg-white p-3 rounded ">
@@ -79,14 +64,30 @@ const CreateThread = () => {
             name="courseid"
           />
 
-          {/* <label htmlFor="courseid"><strong>Thread Id :</strong></label>
+          {/* <label htmlFor="courseid">
+            <strong>Course Name:</strong>
+          </label>
+          <select
+            className="form-control rounded-0"
+            onChange={(e) => setCourseId(e.target.value)}
+            name="courseid"
+          >
+            <option value="">Select Course</option>
+            {Courses.map((course) => (
+              <option key={course.CourseId} value={course.CourseId}>
+                {course.CourseName}
+              </option>
+            ))}
+          </select> */}
+
+          <label htmlFor="courseid"><strong>Thread Id :</strong></label>
           <input
             type="text"
             placeholder="Enter Course name"
             className="form-control rounded-0"
             onChange={(e) => setThreadId(e.target.value)}
             name="threadid"
-          /> */}
+          />
 
           <label htmlFor="threadstartdate"><strong>Thread Start Date :</strong></label>
           <input

@@ -1,5 +1,5 @@
-import React, { useState , useEffect } from 'react';
-import { Link , useNavigate ,useParams} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const UpdateThread = () => {
@@ -38,7 +38,7 @@ const UpdateThread = () => {
           ThreadStartDate: ThreadStartDate,
           ThreadHeading: ThreadHeading
         })
-    
+
       .then((res) => {
         console.log('Updations are made');
         alert('Updations are done');
@@ -49,12 +49,12 @@ const UpdateThread = () => {
         console.error(err);
       });
   };
-console.log('after axios')
+  console.log('after axios')
   return (
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className="bg-white p-3 rounded w-40">
-      <h2>List Of Available Threads :</h2>
-        <Link to = '/updatethreadlist' className='btn btn-primary w-100 rounded 0'>
+        <h2>List Of Available Threads :</h2>
+        <Link to='/updatethreadlist' className='btn btn-primary w-100 rounded 0'>
           List of Threads</Link>
         <h2>Updations For a Thread :</h2>
         <form action="" onSubmit={handleUpdateThread}>
@@ -62,7 +62,7 @@ console.log('after axios')
           <input
             type='text'
             placeholder="Enter UIN"
-            value = {courseUIN}
+            value={courseUIN}
             //readOnly
             className="form-control rounded-0"
             //onChange={(e) => setUIN(e.target.value)}
@@ -73,7 +73,7 @@ console.log('after axios')
           <input
             type="text"
             placeholder="Enter Thread Id"
-            value = {CourseId}
+            value={CourseId}
             className="form-control rounded-0"
             onChange={(e) => setCourseId(e.target.value)}
             name="courseid"

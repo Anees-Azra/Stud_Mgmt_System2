@@ -58,7 +58,7 @@ const UpdateCourse = () => {
             name="courseid"
           />
 
-          <label htmlFor="courseid"><strong>Course Name :</strong></label>
+          <label htmlFor="coursename"><strong>Course Name :</strong></label>
           <input
             type="text"
             placeholder="Enter Course name"

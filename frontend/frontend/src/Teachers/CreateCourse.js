@@ -4,9 +4,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 
 const CreateCourse = () => {
   console.log('in create course');
-  const [CourseId, setCourseId] = useState('');
+  //const [CourseId, setCourseId] = useState('');
   const [CourseName, setCourseName] = useState('');
-  const { courseIdFromURL } = useParams();
+  //const { courseIdFromURL } = useParams();
   const navigate = useNavigate();
 
 
@@ -14,7 +14,6 @@ const CreateCourse = () => {
     console.log('in handlecreatecourse');
     e.preventDefault();
     axios.post('http://localhost:8080/routes/courses/createcourse', {
-      CourseId: CourseId,
       CourseName: CourseName,
     })
       .then((res) => {
@@ -60,5 +59,4 @@ const CreateCourse = () => {
 };
 
 export default CreateCourse;
-
 
