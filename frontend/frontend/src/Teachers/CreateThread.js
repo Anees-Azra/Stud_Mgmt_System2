@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link , useNavigate } from 'react-router-dom';
 
-
+//Add comments
 const CreateThread = () => {
   console.log('in create thread');
   const[Courses,setCourses] = useState([]);
