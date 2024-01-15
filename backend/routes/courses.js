@@ -55,6 +55,20 @@ router.get('/readallcourses', (req, res) => {
     })
 })
 
+router.get('/readcourse/:CourseId', (req, res) => {
+    console.log('in readcourse for courseid')
+    const courseId = parseInt(req.params.CourseId, 10);
+    const sql = 'select CourseName from courses where Courseid = ?';
+    db.query(sql, [courseId],(err, data) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ Error: "Database Error" });
+        }
+        return res.json(data)
+    
+    })
+})
+
 router.put('/updatecourse/:CourseId', (req, res) => {
     const courseId = parseInt(req.params.CourseId, 10);
     const { CourseId } = req.params;
