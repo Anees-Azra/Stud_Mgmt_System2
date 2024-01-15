@@ -42,20 +42,39 @@ router.get('/readallthreads', (req, res) => {
     })
 })
 
-router.get('/readallthreads-UIN/:UIN', (req, res) => {
-    const { UIN } = req.params;
-    const { CourseId, ThreadId, ThreadStartDate, ThreadHeading, IsDelete } = req.body;
-    const sql = 'select * from threads where UIN = ?';
-    //const values = {CourseId , ThreadId , ThreadStartDate , ThreadHeading , IsDelete , UIN };
+// router.get('/readallthreads-UIN/:UIN', (req, res) => {
+//     const { UIN } = req.params;
+//     const { CourseId, ThreadId, ThreadStartDate, ThreadHeading, IsDelete } = req.body;
+//     const sql = 'select * from threads where UIN = ?';
+//     //const values = {CourseId , ThreadId , ThreadStartDate , ThreadHeading , IsDelete , UIN };
 
-    db.query(sql, [UIN], (err, data) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).json({ Error: "Database Error" });
+//     db.query(sql, [UIN], (err, data) => {
+//         if (err) {
+//             console.log(err);
+//             return res.status(500).json({ Error: "Database Error" });
+//         }
+//         return res.json(data);
+//     })
+// })
+router.get('/readthread/:UIN', (req,res) => {
+    console.log('in readthread/:uin')
+    const{UIN} = req.params;
+    const{CourseId , ThreadId,ThreadStartDate , ThreadHeading} = req.body;
+    const sql= `select UIN,CourseId , ThreadId , ThreadStartDate , ThreadHeading from threads 
+                where UIN in (select UIN from users where role = 'Teacher')`;
+
+    db.query(sql , [UIN] , (err,data) => {
+        if(err){
+            console.log(err)
+            return res.status(500).json({Error :"Database Error"})
         }
-        return res.json(data);
+        console.log('data' , data)
+        return res.json(data)
+        
     })
+
 })
+
 
 router.put('/updatethreads-UIN/:UIN', (req, res) => {
     console.log('in updatethtreads-UIN route')

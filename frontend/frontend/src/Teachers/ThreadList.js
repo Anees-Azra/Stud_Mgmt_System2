@@ -12,7 +12,7 @@ const ThreadList = () => {
     const fetchThreads = async () => {
       try {
         console.log('in try block');
-        const response = await axios.get('http://localhost:8080/routes/threads/readallthreads');
+        const response = await axios.get('http://localhost:8080/routes/threads/readthread/:UIN');
         console.log(response.data);
         setThreads(response.data);
       } catch (error) {
@@ -59,7 +59,7 @@ const ThreadList = () => {
           </table>
         </div>
         <Link to='/createthread' className=' btn btn-primary w-25 rounded-0 float-end' >Add New Thread</Link>
-        <Link to ='/teacherdashboard' className='btn btn-primary w-25 rounded-0 float-start'>Teacher Dashboard</Link>
+        <Link to ='/teacherdashboard' className='btn btn-primary w-30 rounded-0 float-start'>Teacher Dashboard</Link>
       </div>
     </div>
   );

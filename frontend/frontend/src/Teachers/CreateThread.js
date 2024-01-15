@@ -1,17 +1,33 @@
-import React, { useState} from 'react';
+import React, { useState , useEffect} from 'react';
 import axios from 'axios';
 import { Link , useNavigate } from 'react-router-dom';
 
 
 const CreateThread = () => {
   console.log('in create thread');
-  const[Courses,setCourses] = useState([]);
+  
+  const[threads,setThreads] = useState([]);
   const [UIN, setUIN] = useState('');
   const [CourseId, setCourseId] = useState('');
   const [ThreadId, setThreadId] = useState('');
   const [ThreadStartDate, setThreadStartDate] = useState('');
   const [ThreadHeading, setThreadHeading] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch the list of threads when the component mounts
+    console.log('in useeffect')
+    axios.get('http://localhost:8080/routes/threads/readallthreads')
+      .then((res) => {
+        setThreads(res.data);
+      })
+      
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+
 
 
   const handleCreateThread = (e) => {
