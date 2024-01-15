@@ -1,14 +1,14 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const UpdateCourse = () => {
   console.log('in update course')
-  
-  const { courseId} = useParams();
-  console.log('courseId:' , courseId)
+
+  const { courseId } = useParams();
+  console.log('courseId:', courseId)
   const [CourseName, setCourseName] = useState('');
-  console.log('coursename : ' , CourseName)
+  console.log('coursename : ', CourseName)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,9 +17,10 @@ const UpdateCourse = () => {
       .get(`http://localhost:8080/routes/courses/readcourse/${courseId}`)
       .then((res) => {
         // Assuming your API response has a property named 'CourseName'
-      const courseData = res.data && res.data[0]; // Check if res.data is truthy and has at least one element
-      const courseName = courseData ? courseData.CourseName : '';
-      setCourseName(courseName);
+        const courseData = res.data && res.data[0]; // Check if res.data is truthy and has at least one element
+        console.log('courseData', courseData)
+        const courseName = courseData ? courseData.CourseName : '';
+        setCourseName(courseName);
       })
       .catch((err) => {
         console.error(err);
@@ -36,7 +37,7 @@ const UpdateCourse = () => {
       alert('Invalid CourseId. Please enter a valid number.');
       return;
     }
-    console.log('parsedCourseId' , parsedCourseId)
+    console.log('parsedCourseId', parsedCourseId)
 
     // Now parsedCourseId is a valid integer
     axios
@@ -44,7 +45,7 @@ const UpdateCourse = () => {
         CourseId: parsedCourseId,
         CourseName: CourseName,
       })
-      
+
 
       .then((res) => {
         console.log('Course is updated');
@@ -60,7 +61,7 @@ const UpdateCourse = () => {
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className="bg-white p-3 rounded w-25">
         <h2>List Of Available Courses</h2>
-    
+
         <Link to='/updatecourselist' className='btn btn-primary w-100 rounded 0'>
           List of Courses
         </Link>
@@ -85,7 +86,7 @@ const UpdateCourse = () => {
             onChange={(e) => setCourseName(e.target.value)}
             name="coursename"
           />
-      
+
           <button type="submit" className="btn btn-success w-100 rounded-0">
             Update Course
           </button>
@@ -102,3 +103,4 @@ const UpdateCourse = () => {
 }
 
 export default UpdateCourse
+
