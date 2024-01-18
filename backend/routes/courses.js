@@ -3,10 +3,10 @@ import mysql from 'mysql';
 //import verifyUser from '../middleware/verifyUser.js'
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'stud_database'
+     host: 'localhost',
+     user: 'root',
+     password: 'password',
+     database: 'stud_database'
 })
 
 const router = express();
@@ -14,10 +14,10 @@ const router = express();
 const app = express();
 app.use(express.json);
 
-//router.use(verifyUser);
+// //router.use(verifyUser);
 router.post('/createcourse',(req, res) => {
-    console.log('in createcourse route')
-    const { CourseName, IsDelete } = req.body;
+     console.log('in createcourse route')
+     const { CourseName, IsDelete } = req.body;
     console.log('req body', req.body)
     const sql = 'insert into courses (CourseName, IsDelete) values (?,?)';
     const values = [CourseName, 0]
@@ -98,42 +98,42 @@ router.put('/updatecourse/:CourseId', (req, res) => {
 
 
 
-// router.put('/updatecourse/:CourseId', (req, res) => {
-//     // Parse CourseId as an integer
-//     const courseId = parseInt(req.params.CourseId, 10);
+router.put('/updatecourse/:CourseId', (req, res) => {
+    // Parse CourseId as an integer
+    const courseId = parseInt(req.params.CourseId, 10);
 
-//     // Check if CourseId is a valid number
-//     if (isNaN(courseId)) {
-//         return res.status(400).json({ error: 'Invalid CourseId' });
-//     }
+    // Check if CourseId is a valid number
+    if (isNaN(courseId)) {
+        return res.status(400).json({ error: 'Invalid CourseId' });
+    }
 
-//     const { CourseName } = req.body;
+    const { CourseName } = req.body;
 
-//     // Check if CourseName is provided
-//     if (!CourseName) {
-//         return res.status(400).json({ error: 'CourseName is required for update' });
-//     }
+    // Check if CourseName is provided
+    if (!CourseName) {
+        return res.status(400).json({ error: 'CourseName is required for update' });
+    }
 
-//     const sql = 'UPDATE courses SET CourseName=? WHERE CourseId=?';
-//     const values = [CourseName, courseId];
+    const sql = 'UPDATE courses SET CourseName=? WHERE CourseId=?';
+    const values = [CourseName, courseId];
 
-//     db.query(sql, values, (err, result) => {
-//         if (err) {
-//             console.error(err);
-//             return res.status(500).json({ error: 'Database Error' });
-//         }
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Database Error' });
+        }
 
-//         if (result.affectedRows === 1) {
-//             return res.json({
-//                 CourseId: courseId,
-//                 CourseName: CourseName,
-//                 Message: 'Course Updated Successfully',
-//             });
-//         }
+        if (result.affectedRows === 1) {
+            return res.json({
+                CourseId: courseId,
+                CourseName: CourseName,
+                Message: 'Course Updated Successfully',
+            });
+        }
 
-//         return res.status(404).json({ error: 'Course Not Found' });
-//     });
-// });
+        return res.status(404).json({ error: 'Course Not Found' });
+    });
+});
 
 
 router.delete('/deletecourse/:CourseId', (req, res) => {
@@ -152,3 +152,4 @@ router.delete('/deletecourse/:CourseId', (req, res) => {
 })
 
 export default router
+

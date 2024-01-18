@@ -1,12 +1,11 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link , useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const CreateThread = () => {
   console.log('in create thread');
-  
-  const[threads,setThreads] = useState([]);
+
+  const [threads, setThreads] = useState([]);
   const [UIN, setUIN] = useState('');
   const [CourseId, setCourseId] = useState('');
   const [ThreadId, setThreadId] = useState('');
@@ -21,14 +20,11 @@ const CreateThread = () => {
       .then((res) => {
         setThreads(res.data);
       })
-      
+
       .catch((err) => {
         console.error(err);
       });
   }, []);
-
-
-
 
   const handleCreateThread = (e) => {
     console.log('in handlecreatethread');
@@ -57,7 +53,7 @@ const CreateThread = () => {
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className="bg-white p-3 rounded ">
         <h2>List Of Available Threads :</h2>
-        <Link to = '/threadlist' className='btn btn-primary w-100 rounded 0'>
+        <Link to='/threadlist' className='btn btn-primary w-100 rounded 0'>
           List of Threads</Link>
         <h2>Create Thread</h2>
         <form action="" onSubmit={handleCreateThread}>

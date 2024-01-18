@@ -7,7 +7,7 @@ import threadsRoute from './routes/threads.js'
 import cors from 'cors';
 
 const app = express();
-//const
+
 app.use(cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -15,9 +15,7 @@ app.use(cors({
     optionsSuccessStatus: 204,
 }));
 
-
 app.use(express.json());
-
 
 app.use('/routes/userauth', userauthRoute);
 app.use('/routes/user', userRoute);
@@ -25,13 +23,7 @@ app.use('/routes/courses', coursesRoute);
 app.use('/routes/roles', rolesRoute);
 app.use('/routes/threads', threadsRoute);
 
-
-// Handle root URL and root URL with trailing slash
-// app.get(['/', '/routes/userauth'], (req, res) => {
-//     res.status(200).json({ message: 'Welcome to the API' });
-// });
-
-
 app.listen(8080, () => {
     console.log('Server Started on 8080');
 });
+

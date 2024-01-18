@@ -76,6 +76,21 @@ router.get('/readuser/email/:EmailId', (req, res) => {
    })
 })
 
+router.get('/user/isteacher/:UIN' ,(req,res) => {
+   const {UIN} = req.params;
+   const {role} = req.body;
+   const sql = `select Role from users where UIN = ?`;
+
+   db.query(sql, [UIN] ,(err,data) => {
+      if(err){
+         console.log(err);
+         return res.status(500).json({Error : "Database Error"})
+      } 
+      return res.json(data);
+   })
+   
+})
+
 router.put('/updateuser/:UIN', (req, res) => {
    console.log('update user', req.body)
    const { UIN } = req.params;
