@@ -1,5 +1,6 @@
 import express from 'express';
 import mysql from 'mysql';
+import { createRoutesFromElements } from 'react-router-dom';
 
 const app = express();
 const router = express();
@@ -52,6 +53,31 @@ router.get('/readrole/:RoleId', (req, res) => {
         return res.json(data)
     })
 })
+
+
+router.get('/readrole/uin/:UIN', (req, res) => {
+    const { UIN } = req.params;
+    console.log('uin', UIN);
+    const sql = 'SELECT Role FROM users WHERE UIN = ?';
+    console.log('Executing SQL:', sql, [String(UIN)]);
+      
+    db.query(sql, [String(UIN)], (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ Error: 'Database Error' });
+      } else {
+        console.log('data:', data); // Log the retrieved data for debugging
+  
+        if (data && data.length > 0 && data[0].Role) {
+          const role = data[0].Role;
+          return res.json({ Role: role });
+        } else {
+          return res.status(404).json({ Error: 'User not found or Role is undefined' });
+        }
+      }
+    });
+  });
+
 
 router.put('/updaterole/:RoleId', (req, res) => {
     const { RoleId } = req.params;

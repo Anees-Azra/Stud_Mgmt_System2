@@ -1,6 +1,5 @@
 import express from 'express';
 import mysql from 'mysql';
-//import verifyUser from '../middleware/verifyUser.js'
 
 const db = mysql.createConnection({
      host: 'localhost',

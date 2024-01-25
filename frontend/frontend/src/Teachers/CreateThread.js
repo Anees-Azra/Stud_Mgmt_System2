@@ -6,8 +6,10 @@ const CreateThread = () => {
   console.log('in create thread');
 
   const [threads, setThreads] = useState([]);
+  const [Courses,setCourses] = useState([]);
   const [UIN, setUIN] = useState('');
   const [CourseId, setCourseId] = useState('');
+  const [CourseName , setCourseName] = useState([]);
   const [ThreadId, setThreadId] = useState('');
   const [ThreadStartDate, setThreadStartDate] = useState('');
   const [ThreadHeading, setThreadHeading] = useState('');
@@ -24,31 +26,56 @@ const CreateThread = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
 
-  const handleCreateThread = (e) => {
+      axios.get('http://localhost:8080/routes/courses/readallcourses')
+      .then((res)=>{
+        setCourses(res.data);
+      })
+      .catch((err) =>{
+        console.error(err);
+      })
+  }, []);
+  
+  const handleCreateThread = async (e) => {
     console.log('in handlecreatethread');
     e.preventDefault();
-    axios
-      .post('http://localhost:8080/routes/threads/createthread',
-        {
+  
+    // Fetch user role based on UIN
+    try {
+      const response = await axios.get(`http://localhost:8080/routes/roles/readrole/uin/${UIN}`);
+      const userRole = response.data.Role;
+      console.log('userrole',userRole)
+  
+      // Check if the user role is 'Teacher'
+      if (userRole !== 'Teacher') {
+        alert('Only users with role "Teacher" can create threads.');
+        return;
+      }
+  
+      // Continue with thread creation
+      axios.post('http://localhost:8080/routes/threads/createthread',
+       {
           UIN: UIN,
           CourseId: CourseId,
           ThreadId: ThreadId,
           ThreadStartDate: ThreadStartDate,
           ThreadHeading: ThreadHeading,
-          IsDelete: 0
+          IsDelete: 0,
         })
-      .then((res) => {
-        console.log('Thread is created');
-        alert('Thread is Created')
-        navigate('/threadlist')
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+        .then((res) => {
+          console.log('Thread is created');
+          alert('Thread is Created');
+          navigate('/threadlist');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } catch (error) {
+      //gbconsole.error(error);
+      alert('The entered UIN is not of a Teacher');
+    }
   };
-
+  
   return (
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className="bg-white p-3 rounded ">
@@ -67,22 +94,13 @@ const CreateThread = () => {
             name="uin"
           />
 
-          <label htmlFor="courseid"><strong>Course Id :</strong></label>
-          <input
-            type="text"
-            placeholder="Enter Course Id"
-            className="form-control rounded-0"
-            onChange={(e) => setCourseId(e.target.value)}
-            name="courseid"
-          />
-
-          {/* <label htmlFor="courseid">
+          <label htmlFor="coursename">
             <strong>Course Name:</strong>
           </label>
           <select
             className="form-control rounded-0"
-            onChange={(e) => setCourseId(e.target.value)}
-            name="courseid"
+            onChange={(e) => setCourseName(e.target.value)}
+            name="coursename"
           >
             <option value="">Select Course</option>
             {Courses.map((course) => (
@@ -90,16 +108,7 @@ const CreateThread = () => {
                 {course.CourseName}
               </option>
             ))}
-          </select> */}
-
-          {/* <label htmlFor="courseid"><strong>Thread Id :</strong></label>
-          <input
-            type="text"
-            placeholder="Enter Course name"
-            className="form-control rounded-0"
-            onChange={(e) => setThreadId(e.target.value)}
-            name="threadid"
-          /> */}
+          </select>
 
           <label htmlFor="threadstartdate"><strong>Thread Start Date :</strong></label>
           <input
@@ -133,5 +142,5 @@ const CreateThread = () => {
     </div>
   );
 };
-
 export default CreateThread;
+

@@ -47,14 +47,23 @@ const UpdateThreadList = () => {
                   <td>{thread.ThreadId}</td>
                   <td>{thread.ThreadStartDate}</td>
                   <td>{thread.ThreadHeading}</td>
-                  <td><Link to ={`/updatethread/${thread.UIN}`} className='btn btn-outline-danger w-20 rounded-0'>
+                  <td><Link to={{
+                      pathname: `/updatethread/${thread.UIN}`,
+                      state: {
+                          CourseId: thread.CourseId,
+                          ThreadId: thread.ThreadId,
+                          ThreadStartDate: thread.ThreadStartDate,
+                          ThreadHeading: thread.ThreadHeading
+                        }
+                      }}
+                  className='btn btn-outline-danger w-20 rounded-0'>
                        Update</Link></td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
-        <Link to='/createthread' className=' btn btn-primary w-25 rounded-0 float-end' >Back</Link>
+        <Link to='/updatethread' className=' btn btn-primary w-25 rounded-0 float-end' >Back</Link>
         <Link to ='/teacherdashboard' className='btn btn-primary w-25 rounded-0 float-start'>Teacher Dashboard</Link>
       </div>
     </div>

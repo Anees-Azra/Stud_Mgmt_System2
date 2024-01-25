@@ -15,8 +15,8 @@ const db = mysql.createConnection({
 router.post('/createthread', (req, res) => {
     const { UIN, CourseId, ThreadStartDate, ThreadHeading, IsDelete } = req.body;
     console.log(req.body.UIN);
-    const sql = 'insert into threads(UIN, CourseId, ThreadStartDate, ThreadHeading, IsDelete) values (?,?,?,?,?)';
-    const values = [UIN, CourseId, ThreadStartDate, ThreadHeading, IsDelete]
+    const sql = 'insert into threads(UIN, ThreadStartDate, ThreadHeading, IsDelete) values (?,?,?,?)';
+    const values = [UIN,ThreadStartDate, ThreadHeading, IsDelete]
     console.log(values);
     console.log('query', sql);
     console.log('values', values);

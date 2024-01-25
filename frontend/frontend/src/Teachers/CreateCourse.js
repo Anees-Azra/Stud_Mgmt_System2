@@ -6,6 +6,7 @@ const CreateCourse = () => {
   console.log('in create course');
   const [courses, setCourses] = useState([]);
   const [CourseName, setCourseName] = useState('');
+  const [UserRole , setUserRole] = useState('');
   //const [selectedCourse, setSelectedCourse] = useState('');
   const navigate = useNavigate();
 
@@ -14,6 +15,7 @@ const CreateCourse = () => {
     axios.get('http://localhost:8080/routes/courses/readallcourses')
       .then((res) => {
         setCourses(res.data);
+        //setUserRole(res.data.Role)
       })
       .catch((err) => {
         console.error(err);
@@ -24,6 +26,7 @@ const CreateCourse = () => {
   const handleCreateCourse = (e) => {
     console.log('in handlecreatecourse');
     e.preventDefault();
+    //if (UserRole === 'Teacher'){
     axios.post('http://localhost:8080/routes/courses/createcourse', {
       CourseName: CourseName,
     })
@@ -35,6 +38,8 @@ const CreateCourse = () => {
       .catch((err) => {
         console.error(err);
       });
+  // } else{
+  //   alert('Only Teachers can create the thread')};
   };
 
   return (
