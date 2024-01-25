@@ -6,7 +6,8 @@ const UpdateThread = () => {
   console.log('in updatethread component')
   //const {courseUIN} = useParams();
   const { UIN: courseUIN } = useParams();
-
+  const [Courses,setCourses] = useState([]);
+  const [CourseName , setCourseName] = useState([]);
   const [CourseId, setCourseId] = useState('');
   const [ThreadId, setThreadId] = useState('');
   const [ThreadStartDate, setThreadStartDate] = useState('');
@@ -16,6 +17,27 @@ const UpdateThread = () => {
   // useEffect(() => {
   //   setCourseId(courseUIN);
   // }, [courseUIN]);
+
+  useEffect(() => {
+    // Fetch the list of threads when the component mounts
+    console.log('in useeffect')
+    // axios.get('http://localhost:8080/routes/threads/readallthreads')
+    //   .then((res) => {
+    //     setThreads(res.data);
+    //   })
+
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+
+      axios.get('http://localhost:8080/routes/courses/readallcourses')
+      .then((res)=>{
+        setCourses(res.data);
+      })
+      .catch((err) =>{
+        console.error(err);
+      })
+  }, []);
 
   const handleUpdateThread = (e) => {
     console.log('in handleupdatethread')
@@ -69,7 +91,7 @@ const UpdateThread = () => {
             name="uin"
           />
 
-          <label htmlFor="courseid"><strong>Course Id :</strong></label>
+          {/* <label htmlFor="courseid"><strong>Course Id :</strong></label>
           <input
             type="text"
             placeholder="Enter Thread Id"
@@ -77,7 +99,23 @@ const UpdateThread = () => {
             className="form-control rounded-0"
             onChange={(e) => setCourseId(e.target.value)}
             name="courseid"
-          />
+          /> */}
+
+          <label htmlFor="coursename">
+            <strong>Course Name:</strong>
+          </label>
+          <select
+            className="form-control rounded-0"
+            onChange={(e) => setCourseName(e.target.value)}
+            name="coursename"
+          >
+            <option value="">Select Course</option>
+            {Courses.map((course) => (
+              <option key={course.CourseId} value={course.CourseId}>
+                {course.CourseName}
+              </option>
+            ))}
+          </select>
 
           <label htmlFor="courseid"><strong>Thread Id :</strong></label>
           <input
