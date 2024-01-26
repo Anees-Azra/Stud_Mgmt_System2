@@ -41,6 +41,7 @@ const UpdateCourseList = () => {
                     <Link to={`/updatecourse/${course.CourseId}`} className="btn btn-outline-danger w-10 h-10">
                       Update
                     </Link>
+                    
                   </td>
                 </tr>
               ))}

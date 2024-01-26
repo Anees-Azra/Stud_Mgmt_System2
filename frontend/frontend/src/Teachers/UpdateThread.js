@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
+
+//include comments
 
 const UpdateThread = () => {
   console.log('in updatethread component')
@@ -17,6 +19,15 @@ const UpdateThread = () => {
   // useEffect(() => {
   //   setCourseId(courseUIN);
   // }, [courseUIN]);
+  const location = useLocation();
+  const initialState = location.state || {}; // Retrieve the state from the location
+
+  useEffect(() => {
+    setCourseId(initialState.CourseId || ''); // Set initial values based on the state
+    setThreadId(initialState.ThreadId || '');
+    setThreadStartDate(initialState.ThreadStartDate || '');
+    setThreadHeading(initialState.ThreadHeading || '');
+  }, [initialState]);
 
   useEffect(() => {
     // Fetch the list of threads when the component mounts
@@ -55,10 +66,11 @@ const UpdateThread = () => {
     axios
       .put(`http://localhost:8080/routes/threads/updatethreads-UIN/${parsedUIN}`,
         {
-          CourseId: CourseId,
+          //CourseId: CourseId,
           ThreadId: ThreadId,
           ThreadStartDate: ThreadStartDate,
-          ThreadHeading: ThreadHeading
+          ThreadHeading: ThreadHeading,
+          IsDelete : 0
         })
 
       .then((res) => {
