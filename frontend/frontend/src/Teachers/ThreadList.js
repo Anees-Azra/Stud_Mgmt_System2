@@ -38,23 +38,22 @@ const ThreadList = () => {
             <thead>
               <tr>
                 <th>UIN :</th>
-                <th>CourseId:</th>
-                <th>ThreadId:</th>
-                <th>ThreadStartDate :</th>
-                <th>ThreadHeading :</th>
+                <th>Course Name:</th>
+                <th>Thread Id:</th>
+                <th>Thread Start Date :</th>
+                <th>Thread Heading :</th>
               </tr>
             </thead>
             <tbody>
               {threads.map((thread) =>
                 <tr>
                   <td>{thread.UIN}</td>
-                  <td>{thread.CourseId}</td>
+                  <td>{thread.CourseName}</td>
                   <td>{thread.ThreadId}</td>
                   <td>{thread.ThreadStartDate}</td>
                   <td>{thread.ThreadHeading}</td>
                 </tr>
               )}
-
             </tbody>
           </table>
         </div>

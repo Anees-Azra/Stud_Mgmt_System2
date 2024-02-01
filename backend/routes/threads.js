@@ -42,6 +42,20 @@ router.get('/readallthreads', (req, res) => {
     })
 })
 
+router.get('/readallthreads-coursename' , (req,res) => {
+    const sql = `select threads.UIN,courses.CourseName,threads.ThreadId,threads.ThreadStartdate,threads.ThreadHeading
+                 from threads inner join courses
+                 where threads.CourseId = courses.CourseId`;
+    
+    db.query(sql , (err,data) => {
+        if(err){
+            console.log(err);
+            return res.status(500).json ({Error : "Datebase Error"})
+        }
+        return res.json(data);
+    })
+})
+
 // router.get('/readallthreads-UIN/:UIN', (req, res) => {
 //     const { UIN } = req.params;
 //     const { CourseId, ThreadId, ThreadStartDate, ThreadHeading, IsDelete } = req.body;
@@ -72,7 +86,6 @@ router.get('/readthread/:UIN', (req,res) => {
         return res.json(data)
         
     })
-
 })
 
 

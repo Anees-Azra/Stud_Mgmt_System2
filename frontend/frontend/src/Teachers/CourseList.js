@@ -8,7 +8,6 @@ const CourseList = () => {
 
   useEffect(() => {
     console.log('in courselist , useEffect');
-
     const fetchCourses = async () => {
       try {
         console.log('in try block');
@@ -20,7 +19,6 @@ const CourseList = () => {
         console.log(error);
       }
     };
-
     fetchCourses();
   }, []);
 

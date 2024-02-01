@@ -7,14 +7,17 @@ import axios from 'axios';
 const UpdateThread = () => {
   console.log('in updatethread component')
   //const {courseUIN} = useParams();
-  const { UIN: courseUIN } = useParams();
+  // { UIN: courseUIN } = useParams();
+  //const {ThreadId : threadId} = useParams();
   const [Courses,setCourses] = useState([]);
   const [CourseName , setCourseName] = useState([]);
   const [CourseId, setCourseId] = useState('');
-  const [ThreadId, setThreadId] = useState('');
+  //const [ThreadId, setThreadId] = useState('');
   const [ThreadStartDate, setThreadStartDate] = useState('');
   const [ThreadHeading, setThreadHeading] = useState('');
   const navigate = useNavigate();
+  const { UIN: courseUIN, ThreadId: paramThreadId } = useParams();
+  const [ThreadId, setThreadId] = useState(paramThreadId || '');
 
   // useEffect(() => {
   //   setCourseId(courseUIN);
@@ -27,7 +30,7 @@ const UpdateThread = () => {
     setThreadId(initialState.ThreadId || '');
     setThreadStartDate(initialState.ThreadStartDate || '');
     setThreadHeading(initialState.ThreadHeading || '');
-  }, [initialState]);
+  }, [paramThreadId]);
 
   useEffect(() => {
     // Fetch the list of threads when the component mounts
@@ -66,7 +69,7 @@ const UpdateThread = () => {
     axios
       .put(`http://localhost:8080/routes/threads/updatethreads-UIN/${parsedUIN}`,
         {
-          //CourseId: CourseId,
+          Coursename: CourseName,
           ThreadId: ThreadId,
           ThreadStartDate: ThreadStartDate,
           ThreadHeading: ThreadHeading,
@@ -119,6 +122,7 @@ const UpdateThread = () => {
             className="form-control rounded-0"
             onChange={(e) => setCourseName(e.target.value)}
             name="coursename"
+          
           >
             <option value="">Select Course</option>
             {Courses.map((course) => (
@@ -131,10 +135,12 @@ const UpdateThread = () => {
           <label htmlFor="courseid"><strong>Thread Id :</strong></label>
           <input
             type="text"
-            placeholder="Enter Course name"
+            placeholder="Enter thread Id"
             className="form-control rounded-0"
             onChange={(e) => setThreadId(e.target.value)}
             name="threadid"
+            value = {ThreadId}
+            
           />
 
           <label htmlFor="threadstartdate"><strong>Thread Start Date :</strong></label>
@@ -171,3 +177,4 @@ const UpdateThread = () => {
 }
 
 export default UpdateThread;
+

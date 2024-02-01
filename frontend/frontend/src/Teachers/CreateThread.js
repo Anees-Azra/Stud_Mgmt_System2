@@ -80,7 +80,7 @@ const CreateThread = () => {
     <div className="d-flex justify-content-center align-items-center bg-primary vh-100">
       <div className="bg-white p-3 rounded ">
         <h2>List Of Available Threads :</h2>
-        <Link to='/threadlist' className='btn btn-primary w-100 rounded 0'>
+        <Link to='/threadlist' className='btn btn-primary w-80 rounded 0'>
           List of Threads</Link>
         <h2>Create Thread</h2>
         <form action="" onSubmit={handleCreateThread}>
@@ -109,6 +109,15 @@ const CreateThread = () => {
               </option>
             ))}
           </select>
+          
+          <label htmlFor='threadid'><strong>Thread Id :</strong></label>
+          <input
+            type='text'
+            placeholder="Enter Thread Id"
+            className="form-control rounded-0"
+            onChange={(e) => setThreadId(e.target.value)}
+            name="threadid"
+          />
 
           <label htmlFor="threadstartdate"><strong>Thread Start Date :</strong></label>
           <input

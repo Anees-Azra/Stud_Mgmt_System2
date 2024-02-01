@@ -61,7 +61,7 @@ router.get('/readrole/uin/:UIN', (req, res) => {
     const sql = 'SELECT Role FROM users WHERE UIN = ?';
     console.log('Executing SQL:', sql, [String(UIN)]);
 
-    
+
       
     db.query(sql, [String(UIN)], (err, data) => {
       if (err) {
