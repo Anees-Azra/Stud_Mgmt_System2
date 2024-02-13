@@ -94,7 +94,21 @@ router.put('/updatethreads-UIN/:UIN', (req, res) => {
     const { UIN } = req.params;
     console.log('uin', UIN)
     const { CourseId, ThreadId, ThreadStartDate, ThreadHeading, IsDelete } = req.body;
-    const sql = 'update threads set ThreadStartDate =? , ThreadHeading =? , IsDelete =? where UIN=? and CourseId = ? and ThreadId=?';
+    //const sql = 'update threads set CourseId=?,ThreadStartDate =? , ThreadHeading =? , IsDelete =? where UIN=? and CourseId = ? and ThreadId=?';
+    const sql = `
+    UPDATE threads
+    INNER JOIN courses ON threads.CourseId = courses.CourseId
+    SET
+      threads.ThreadStartDate = ?,
+      threads.ThreadHeading = ?,
+      threads.IsDelete = ?,
+      courses.CourseName = ?
+    WHERE
+      threads.UIN = ? AND
+      threads.ThreadId = ? AND
+      threads.CourseId = ?
+  `;
+
     const values = [ThreadStartDate, ThreadHeading, 0, UIN, CourseId, ThreadId,];
     console.log('sql query', sql)
     console.log('values', values)

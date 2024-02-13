@@ -2,49 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-//include comments
-
 const UpdateThread = () => {
   console.log('in updatethread component')
-  //const {courseUIN} = useParams();
-  // { UIN: courseUIN } = useParams();
-  //const {ThreadId : threadId} = useParams();
   const [Courses,setCourses] = useState([]);
   const [CourseName , setCourseName] = useState([]);
   const [CourseId, setCourseId] = useState('');
-  //const [ThreadId, setThreadId] = useState('');
   const [ThreadStartDate, setThreadStartDate] = useState('');
   const [ThreadHeading, setThreadHeading] = useState('');
   const navigate = useNavigate();
   const { UIN: courseUIN, ThreadId: paramThreadId } = useParams();
   const [ThreadId, setThreadId] = useState(paramThreadId || '');
+  //const [CourseName, setCourseName] = useState(initialState.CourseName || '');
 
-  // useEffect(() => {
-  //   setCourseId(courseUIN);
-  // }, [courseUIN]);
+
   const location = useLocation();
   const initialState = location.state || {}; // Retrieve the state from the location
 
   useEffect(() => {
-    setCourseId(initialState.CourseId || ''); // Set initial values based on the state
+    setCourseName(initialState.CourseName || ''); // Set initial values based on the state
     setThreadId(initialState.ThreadId || '');
     setThreadStartDate(initialState.ThreadStartDate || '');
     setThreadHeading(initialState.ThreadHeading || '');
   }, [paramThreadId]);
 
   useEffect(() => {
-    // Fetch the list of threads when the component mounts
     console.log('in useeffect')
-    // axios.get('http://localhost:8080/routes/threads/readallthreads')
-    //   .then((res) => {
-    //     setThreads(res.data);
-    //   })
-
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
-
-      axios.get('http://localhost:8080/routes/courses/readallcourses')
+    axios.get('http://localhost:8080/routes/courses/readallcourses')
       .then((res)=>{
         setCourses(res.data);
       })
@@ -69,7 +52,7 @@ const UpdateThread = () => {
     axios
       .put(`http://localhost:8080/routes/threads/updatethreads-UIN/${parsedUIN}`,
         {
-          Coursename: CourseName,
+          CourseNmae: CourseName,
           ThreadId: ThreadId,
           ThreadStartDate: ThreadStartDate,
           ThreadHeading: ThreadHeading,
@@ -105,16 +88,6 @@ const UpdateThread = () => {
             name="uin"
           />
 
-          {/* <label htmlFor="courseid"><strong>Course Id :</strong></label>
-          <input
-            type="text"
-            placeholder="Enter Thread Id"
-            value={CourseId}
-            className="form-control rounded-0"
-            onChange={(e) => setCourseId(e.target.value)}
-            name="courseid"
-          /> */}
-
           <label htmlFor="coursename">
             <strong>Course Name:</strong>
           </label>
@@ -122,6 +95,7 @@ const UpdateThread = () => {
             className="form-control rounded-0"
             onChange={(e) => setCourseName(e.target.value)}
             name="coursename"
+            value={CourseName}
           
           >
             <option value="">Select Course</option>
@@ -177,4 +151,3 @@ const UpdateThread = () => {
 }
 
 export default UpdateThread;
-

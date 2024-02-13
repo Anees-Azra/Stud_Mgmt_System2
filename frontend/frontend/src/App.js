@@ -20,6 +20,7 @@ import UpdateThreadList from './Teachers/UpdateThreadList';
 
 const App = () => {
     return (
+
         <BrowserRouter>
             <Routes>
             {/* <ProtectedRoute exact path="/"><Home /></ProtectedRoute> */}
@@ -41,6 +42,7 @@ const App = () => {
             </Routes>
         </BrowserRouter>
         //<Home />
+        //<Parent />
     )
 }
 export default App;
